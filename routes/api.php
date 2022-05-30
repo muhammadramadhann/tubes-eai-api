@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApplicantController;
 use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\MaterialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,11 @@ Route::post('/applicant', [ApplicantController::class, 'store']);
 Route::get('/applicant/{id}', [ApplicantController::class, 'show']);
 Route::put('/applicant/{id}', [ApplicantController::class, 'update']);
 Route::delete('/applicant/{id}', [ApplicantController::class, 'destroy']);
+
+// pembelian bahan baku
+Route::get('/material', [MaterialController::class, 'index']);
+Route::post('/material', [MaterialController::class, 'store']);
+Route::get('/material/{id}', [MaterialController::class, 'show']);
+Route::put('/material/{id}', [MaterialController::class, 'update']);
+Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
+
