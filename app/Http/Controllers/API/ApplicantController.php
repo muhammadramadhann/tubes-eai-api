@@ -89,7 +89,6 @@ class ApplicantController extends Controller
     public function show($id)
     {
         $applicant = Applicant::find($id);
-
         if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',
@@ -125,7 +124,6 @@ class ApplicantController extends Controller
     public function update(Request $request, $id)
     {
         $applicant = Applicant::find($id);
-
         if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',
@@ -179,7 +177,6 @@ class ApplicantController extends Controller
     public function destroy($id)
     {
         $applicant = Applicant::find($id);
-
         if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',

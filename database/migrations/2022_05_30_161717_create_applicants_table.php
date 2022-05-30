@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('pendidikan_terakhir');
             $table->enum('pilihan_divisi', ['Marketing', 'Finance', 'IT', 'SCM', 'HC']);
-            $table->enum('status', ['Dalam proses seleksi', 'Lolos', 'Tidak lolos'])->default('Dalam proses seleksi');
+            $table->enum('status', ['Dalam seleksi', 'Lolos', 'Tidak lolos'])->default('Dalam seleksi');
             $table->timestamps();
         });
     }
