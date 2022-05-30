@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('applicants', function (Blueprint $table) {
             $table->id()->startingValue(rand());
             $table->string('nama');
             $table->string('tempat_lahir');
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('nomor_hp');
             $table->string('alamat');
-            $table->date('tanggal_bergabung');
-            $table->enum('divisi', ['Marketing', 'Finance', 'IT', 'SCM', 'HC']);
-            $table->enum('status', ['Aktif', 'Resign'])->default('Aktif');
+            $table->string('pendidikan_terakhir');
+            $table->enum('pilihan_divisi', ['Marketing', 'Finance', 'IT', 'SCM', 'HC']);
+            $table->enum('status', ['Dalam proses seleksi', 'Lolos', 'Tidak lolos'])->default('Dalam proses seleksi');
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('applicants');
     }
 };
