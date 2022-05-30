@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\Applicant;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmployeeController extends Controller
+class ApplicantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $applicants = Applicant::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data karyawan',
-            'data' => $employees
+            'message' => 'List data pelamar',
+            'data' => $applicants
         ], Response::HTTP_OK);
     }
 
@@ -53,8 +53,8 @@ class EmployeeController extends Controller
             'email' => ['required', 'email:dns'],
             'nomor_hp' => ['required'],
             'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'pendidikan_terakhir' => ['required'],
+            'pilihan_divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
         ]);
 
         if ($validator->fails()) {
@@ -65,16 +65,16 @@ class EmployeeController extends Controller
         }
 
         try {
-            $employee = Employee::create($request->all());
+            $applicant = Applicant::create($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil ditambahkan',
-                'data' => $employee
+                'message' => 'Data pelamar berhasil ditambahkan',
+                'data' => $applicant
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal ditambahkan',
+                'message' => 'Data pelamar gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -88,19 +88,19 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
+        $applicant = Applicant::find($id);
 
-        if (is_null($employee)) {
+        if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pelamar tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail data karyawan',
-            'data' => $employee
+            'message' => 'Detail data pelamar',
+            'data' => $applicant
         ], Response::HTTP_OK);
     }
 
@@ -124,12 +124,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
+        $applicant = Applicant::find($id);
 
-        if (is_null($employee)) {
+        if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pelamar tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -142,9 +142,9 @@ class EmployeeController extends Controller
             'email' => ['required', 'email:dns'],
             'nomor_hp' => ['required'],
             'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'status' => ['required', 'in:Aktif,Sedang cuti,Non Aktif'],
+            'pendidikan_terakhir' => ['required'],
+            'pilihan_divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'status' => ['in:Dalam proses seleksi,Lolos,Tidak lolos'],
         ]);
 
         if ($validator->fails()) {
@@ -155,16 +155,16 @@ class EmployeeController extends Controller
         }
 
         try {
-            $employee->update($request->all());
+            $applicant->update($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil diupdate',
-                'data' => $employee
+                'message' => 'Data pelamar berhasil diupdate',
+                'data' => $applicant
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal diupdate',
+                'message' => 'Data pelamar gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -178,25 +178,25 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
+        $applicant = Applicant::find($id);
 
-        if (is_null($employee)) {
+        if (is_null($applicant)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pelamar tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $employee->delete();
+            $applicant->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil dihapus',
+                'message' => 'Data pelamar berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal dihapus',
+                'message' => 'Data pelamar gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
