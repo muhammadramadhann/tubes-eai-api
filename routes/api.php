@@ -4,6 +4,7 @@ use App\Http\Controllers\API\ApplicantController;
 use App\Http\Controllers\API\AttendanceController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\OffworkController;
+use App\Http\Controllers\API\MaterialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,3 +50,10 @@ Route::post('/offwork', [OffworkController::class, 'store']);
 Route::get('/offwork/{id}', [OffworkController::class, 'show']);
 Route::put('/offwork/{id}', [OffworkController::class, 'update']);
 Route::delete('/offwork/{id}', [OffworkController::class, 'destroy']);
+
+// pembelian bahan baku
+Route::get('/material', [MaterialController::class, 'index']);
+Route::post('/material', [MaterialController::class, 'store']);
+Route::get('/material/{id}', [MaterialController::class, 'show']);
+Route::put('/material/{id}', [MaterialController::class, 'update']);
+Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
