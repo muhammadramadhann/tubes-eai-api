@@ -46,10 +46,13 @@ class MaterialController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'id_pembelian_bahan_baku' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'quotation' => ['required', 'in:'],
-            'status_bahan_baku' => ['required', 'in:Dikemas,Diproses,Dikirim,Diterima'],
-            'status_pembayaran' => ['required', 'in:Belum Dibayar, Sudah Dibayar'],
+            'nama_bahan_baku'  => ['required'],
+            'jenis_bahan_baku' => ['required'],
+            'jumlah_bahan_baku' => ['required'],
+            'total_biaya_bahan_baku' => ['required'],
+            'tanggal_pembelian' => ['required', 'date'],
+            'status_pembayaran' => ['required'],
+            'status_bahan_baku' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -130,10 +133,13 @@ class MaterialController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'id_pembelian_bahan_baku' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'quotation' => ['required', 'in:'],
-            'status_bahan_baku' => ['required', 'in:Dikemas,Diproses,Dikirim,Diterima'],
-            'status_pembayaran' => ['required', 'in:Belum Dibayar, Sudah Dibayar'],
+            'nama_bahan_baku'  => ['required'],
+            'jenis_bahan_baku' => ['required'],
+            'jumlah_bahan_baku' => ['required'],
+            'total_biaya_bahan_baku' => ['required'],
+            'tanggal_pembelian' => ['required', 'date'],
+            'status_pembayaran' => ['required'],
+            'status_bahan_baku' => ['required'],
         ]);
 
         if ($validator->fails()) {

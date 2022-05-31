@@ -10,9 +10,12 @@ class material extends Model
     use HasFactory;
     protected $table = 'materials';
     protected $fillable = [
-        'id_pembelian_bahan_baku',
-        'quotation',
+        'nama_bahan_baku',
+        'jenis_bahan_baku',
+        'jumlah_bahan_baku',
+        'total_biaya_bahan_baku',
+        'tanggal_pembelian',
+        'status_pembayaran',
         'status_bahan_baku',
-        'status_pembayaran'
     ];
 }
