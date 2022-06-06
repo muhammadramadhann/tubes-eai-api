@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('production_plans', function (Blueprint $table) {
-            $table->id('id_produksi');
+            $table->id()->startingValue(rand());
             $table->string('kegiatan_produksi');
             $table->string('penanggung_jawab');
             $table->integer('rencana_anggaran');

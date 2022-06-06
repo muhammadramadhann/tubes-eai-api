@@ -54,10 +54,51 @@ class ProductionPlanController extends Controller
         return new ProductionPlanResource(true, 'Data Rencana Produksi Berhasil Ditambahkan!', $post);
     }
 
-    public function show(ProductionPlan $id_produksi)
+    public function show($id_produksi)
     {
+        $prod = ProductionPlan::find($id_produksi);
         //return single post as a resource
-        return new ProductionPlanResource(true, 'Data Rencana Produksi Ditemukan!', $id_produksi);
+        return new ProductionPlanResource(true, 'Data Rencana Produksi Ditemukan!', $prod);
     }
-    
+
+    public function update(Request $request, $id)
+    {
+        //define validator
+        $validator = Validator::make($request->all(),[
+            'kegiatan_produksi' => 'required',
+            'penanggung_jawab' => 'required',
+            'rencana_anggaran' => 'required',
+            'jenis_barang' => 'required',
+            'deskripsi' => 'required',
+            'tanggal_produksi' => 'required|date'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $prod = ProductionPlan::find($id);
+
+        $prod->update([
+            'kegiatan_produksi' => $request->kegiatan_produksi,
+            'penanggung_jawab' => $request->penanggung_jawab,
+            'rencana_anggaran' => $request->rencana_anggaran,
+            'jenis_barang' => $request->jenis_barang,
+            'deskripsi' => $request->deskripsi,
+            'tanggal_produksi' => $request->tanggal_produksi
+        ]);
+
+        return new ProductionPlanResource(true, 'Data Rencana Produksi Berhasil Diubah!', $prod);
+
+    }
+    public function destroy($id)
+    {
+        //delete column
+        $prod = ProductionPlan::find($id);
+        $prod->delete();
+
+        //return response
+        return new ProductionPlanResource(true, 'Data Rencana Produksi Berhasil Dihapus!', null);
+
+    }
 }
