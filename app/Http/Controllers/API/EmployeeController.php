@@ -142,7 +142,7 @@ class EmployeeController extends Controller
             'alamat' => ['required'],
             'tanggal_bergabung' => ['required', 'date'],
             'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'status' => ['required', 'in:Aktif,Sedang cuti,Non Aktif'],
+            'status' => ['required', 'in:Aktif,Resign'],
         ]);
 
         if ($validator->fails()) {
