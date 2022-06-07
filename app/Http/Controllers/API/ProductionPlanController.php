@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Models\ProductionPlan;
 use App\Http\Controllers\Controller;
@@ -22,7 +22,7 @@ class ProductionPlanController extends Controller
     public function store(Request $request)
     {
         //define validator
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'kegiatan_produksi' => 'required',
             'penanggung_jawab' => 'required',
             'rencana_anggaran' => 'required',
@@ -37,7 +37,7 @@ class ProductionPlanController extends Controller
         }
 
         //change str to date format
-        
+
         // $date = $request->tanggal_produksi;
         // $newdate = Carbon::createFromFormat('m/d/Y', $date)->format('Y-m-d');
 
@@ -64,7 +64,7 @@ class ProductionPlanController extends Controller
     public function update(Request $request, $id)
     {
         //define validator
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'kegiatan_produksi' => 'required',
             'penanggung_jawab' => 'required',
             'rencana_anggaran' => 'required',
@@ -89,7 +89,6 @@ class ProductionPlanController extends Controller
         ]);
 
         return new ProductionPlanResource(true, 'Data Rencana Produksi Berhasil Diubah!', $prod);
-
     }
     public function destroy($id)
     {
@@ -99,6 +98,5 @@ class ProductionPlanController extends Controller
 
         //return response
         return new ProductionPlanResource(true, 'Data Rencana Produksi Berhasil Dihapus!', null);
-
     }
 }
