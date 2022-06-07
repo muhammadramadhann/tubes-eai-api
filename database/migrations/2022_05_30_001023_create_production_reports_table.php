@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('production_reports', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(rand());
+            $table->integer('id_produksi');
+            $table->enum('status_produksi',['Success','Failed']);
+            $table->string('judul_laporan');
+            $table->integer('biaya_produksi');
+            $table->string('lampiran');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

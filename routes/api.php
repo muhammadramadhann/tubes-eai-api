@@ -6,6 +6,7 @@ use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\OffworkController;
 use App\Http\Controllers\API\MaterialController;
 use App\Http\Controllers\API\ProductionPlanController;
+use App\Http\Controllers\API\ProductionReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,3 +62,6 @@ Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
 
 // rencana produksi
 Route::Apiresource('/production-plan', ProductionPlanController::class);
+
+// laporan produksi
+Route::Apiresource('/production-report', ProductionReportController::class);
