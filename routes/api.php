@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\API\ApplicantController;
+use App\Http\Controllers\API\AttendanceController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\DemansController;
 use App\Http\Controllers\API\reportController;
+use App\Http\Controllers\API\OffworkController;
+use App\Http\Controllers\API\MaterialController;
+use App\Http\Controllers\API\ProductionPlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,3 +53,27 @@ Route::post('/salesreport', [reportController::class, 'store']);
 Route::get('/salesreport/{id}', [reportController::class, 'show']);
 Route::put('/salesreport/{id}', [reportController::class, 'update']);
 Route::delete('/salesreport/{id}', [reportController::class, 'destroy']);
+
+// absensi karyaan
+Route::get('/attendance', [AttendanceController::class, 'index']);
+Route::post('/attendance', [AttendanceController::class, 'store']);
+Route::get('/attendance/{id}', [AttendanceController::class, 'show']);
+Route::put('/attendance/{id}', [AttendanceController::class, 'update']);
+Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy']);
+
+// pengajuan cuti karyawan
+Route::get('/offwork', [OffworkController::class, 'index']);
+Route::post('/offwork', [OffworkController::class, 'store']);
+Route::get('/offwork/{id}', [OffworkController::class, 'show']);
+Route::put('/offwork/{id}', [OffworkController::class, 'update']);
+Route::delete('/offwork/{id}', [OffworkController::class, 'destroy']);
+
+// pembelian bahan baku
+Route::get('/material', [MaterialController::class, 'index']);
+Route::post('/material', [MaterialController::class, 'store']);
+Route::get('/material/{id}', [MaterialController::class, 'show']);
+Route::put('/material/{id}', [MaterialController::class, 'update']);
+Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
+
+// rencana produksi
+Route::apiResource('/production-plan', [ProductionPlanController::class]);
