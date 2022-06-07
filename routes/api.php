@@ -5,6 +5,9 @@ use App\Http\Controllers\API\AttendanceController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\OffworkController;
 use App\Http\Controllers\API\MaterialController;
+use App\Http\Controllers\API\PencairanController;
+use App\Http\Controllers\API\PengajuanController;
+use App\Http\Controllers\API\PenggajianController;
 use App\Http\Controllers\API\ProductionPlanController;
 use App\Http\Controllers\API\ProductionReportController;
 use Illuminate\Http\Request;
@@ -60,8 +63,30 @@ Route::get('/material/{id}', [MaterialController::class, 'show']);
 Route::put('/material/{id}', [MaterialController::class, 'update']);
 Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
 
-// rencana produksi
-Route::Apiresource('/production-plan', ProductionPlanController::class);
-
 // laporan produksi
 Route::Apiresource('/production-report', ProductionReportController::class);
+
+// rencana produksi
+Route::apiResource('/production-plan', App\Http\Controllers\Api\ProductionPlanController::class);
+
+// pengajuan dana
+Route::get('/pengajuan', [PengajuanController::class, 'index']);
+Route::post('/pengajuan', [PengajuanController::class, 'create']);
+Route::get('/pengajuan/{id}', [PengajuanController::class, 'tampilkan']);
+Route::put('/pengajuan/{id}', [PengajuanController::class, 'updateData']);
+Route::delete('/pengajuan/{id}', [PengajuanController::class, 'hapus']);
+
+//pencairan dana
+Route::get('/pencairan', [PencairanController::class, 'index']);
+Route::post('/pencairan', [PencairanController::class, 'create']);
+Route::get('/pencairan/{id}', [PencairanController::class, 'tampilkan']);
+Route::put('/pencairan/{id}', [PencairanController::class, 'updateData']);
+Route::delete('/pencairan/{id}', [PencairanController::class, 'hapus']);
+
+//penggajian karyawan
+Route::get('/penggajian', [PenggajianController::class, 'index']);
+Route::post('/penggajian', [PenggajianController::class, 'create']);
+Route::get('/penggajian/{id}', [PenggajianController::class, 'tampilkan']);
+Route::put('/penggajian/{id}', [PenggajianController::class, 'updateData']);
+Route::delete('/penggajian/{id}', [PenggajianController::class, 'hapus']);
+
