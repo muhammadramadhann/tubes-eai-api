@@ -67,7 +67,7 @@ Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
 Route::Apiresource('/production-report', ProductionReportController::class);
 
 // rencana produksi
-Route::apiResource('/production-plan', App\Http\Controllers\Api\ProductionPlanController::class);
+Route::apiResource('/production-plan', ProductionPlanController::class);
 
 // pengajuan dana
 Route::get('/pengajuan', [PengajuanController::class, 'index']);
@@ -89,4 +89,3 @@ Route::post('/penggajian', [PenggajianController::class, 'create']);
 Route::get('/penggajian/{id}', [PenggajianController::class, 'tampilkan']);
 Route::put('/penggajian/{id}', [PenggajianController::class, 'updateData']);
 Route::delete('/penggajian/{id}', [PenggajianController::class, 'hapus']);
-
