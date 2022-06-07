@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\ApplicantController;
 use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\DemansController;
+use App\Http\Controllers\API\reportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +35,17 @@ Route::post('/applicant', [ApplicantController::class, 'store']);
 Route::get('/applicant/{id}', [ApplicantController::class, 'show']);
 Route::put('/applicant/{id}', [ApplicantController::class, 'update']);
 Route::delete('/applicant/{id}', [ApplicantController::class, 'destroy']);
+
+//Permintaan barang
+Route::get('/demans', [DemansController::class, 'index']);
+Route::post('/demans', [DemansController::class, 'store']);
+Route::get('/demans/{id}', [DemansController::class, 'show']);
+Route::put('/demans/{id}', [DemansController::class, 'update']);
+Route::delete('/demans/{id}', [DemansController::class, 'destroy']);
+
+//Laporan Penjualan
+Route::get('/salesreport', [reportController::class, 'index']);
+Route::post('/salesreport', [reportController::class, 'store']);
+Route::get('/salesreport/{id}', [reportController::class, 'show']);
+Route::put('/salesreport/{id}', [reportController::class, 'update']);
+Route::delete('/salesreport/{id}', [reportController::class, 'destroy']);
