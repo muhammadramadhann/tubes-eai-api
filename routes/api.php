@@ -5,7 +5,7 @@ use App\Http\Controllers\API\AttendanceController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\OffworkController;
 use App\Http\Controllers\API\MaterialController;
-use App\Http\Controllers\API\ProductionPlanController;
+use App\Http\Controllers\Api\ProductionPlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,4 +60,4 @@ Route::put('/material/{id}', [MaterialController::class, 'update']);
 Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
 
 // rencana produksi
-Route::apiResource('/production-plan', [ProductionPlanController::class]);
+Route::Apiresource('/production-plan', ProductionPlanController::class);
