@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PengajuanController;
 use App\Http\Controllers\API\PenggajianController;
 use App\Http\Controllers\API\ProductionPlanController;
 use App\Http\Controllers\API\ProductionReportController;
+use App\Http\Controllers\API\PermintaanDataProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,7 @@ Route::get('/applicant/{id}', [ApplicantController::class, 'show']);
 Route::put('/applicant/{id}', [ApplicantController::class, 'update']);
 Route::delete('/applicant/{id}', [ApplicantController::class, 'destroy']);
 
-// absensi karyaan
+// absensi karyawan
 Route::get('/attendance', [AttendanceController::class, 'index']);
 Route::post('/attendance', [AttendanceController::class, 'store']);
 Route::get('/attendance/{id}', [AttendanceController::class, 'show']);
@@ -62,6 +63,14 @@ Route::post('/material', [MaterialController::class, 'store']);
 Route::get('/material/{id}', [MaterialController::class, 'show']);
 Route::put('/material/{id}', [MaterialController::class, 'update']);
 Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
+
+
+// Permintaan Data Produk
+Route::get('/PermintaanDataProduk', [PermintaanDataProdukController::class, 'index']);
+Route::post('/PermintaanDataProduk', [PermintaanDataProdukController::class, 'store']);
+Route::get('/PermintaanDataProduk/{id}', [PermintaanDataProdukController::class, 'show']);
+Route::put('/PermintaanDataProduk/{id}', [PermintaanDataProdukController::class, 'update']);
+Route::delete('/PermintaanDataProduk/{id}', [PermintaanDataProdukController::class, 'destroy']);
 
 // laporan produksi
 Route::Apiresource('/production-report', ProductionReportController::class);
