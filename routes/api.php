@@ -10,8 +10,7 @@ use App\Http\Controllers\API\PengajuanController;
 use App\Http\Controllers\API\PenggajianController;
 use App\Http\Controllers\API\ProductionPlanController;
 use App\Http\Controllers\API\ProductionReportController;
-use App\Http\Controllers\API\PermintaanDataProduk;
-use App\Http\Controllers\API\DataProduk;
+use App\Http\Controllers\API\DataprodukController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +63,13 @@ Route::post('/material', [MaterialController::class, 'store']);
 Route::get('/material/{id}', [MaterialController::class, 'show']);
 Route::put('/material/{id}', [MaterialController::class, 'update']);
 Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
+
+// permintaan data produk
+Route::get('/dataproduk', [DataprodukController::class, 'index']);
+Route::post('/dataproduk', [DataprodukController::class, 'store']);
+Route::get('/dataproduk/{id}', [DataprodukController::class, 'show']);
+Route::put('/dataproduk/{id}', [DataprodukController::class, 'update']);
+Route::delete('/dataproduk/{id}', [DataprodukController::class, 'destroy']);
 
 // laporan produksi
 Route::Apiresource('/production-report', ProductionReportController::class);
