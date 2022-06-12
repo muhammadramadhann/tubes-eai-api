@@ -19,11 +19,11 @@ class DataprodukController extends Controller
      */
     public function index()
     {
-        $dataproduks = Dataproduk::all();
+        $dataproduk = Dataproduk::all();
         return response()->json([
             'status' => 'success',
             'message' => 'List Data Permintaan Produk',
-            'data' => $dataproduks
+            'data' => $dataproduk
         ], Response::HTTP_OK);
     }
 
