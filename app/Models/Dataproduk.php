@@ -11,8 +11,8 @@ class Dataproduk extends Model
 
     protected $table = 'dataproduks';
     protected $fillable = [
+        'nama_produk',
         'ketersediaan_produk',
-        'status_pengiriman_kepada_scm',
-        'status_produk',
+        'jumlah_stok',
     ];
 }

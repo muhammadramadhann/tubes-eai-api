@@ -12,6 +12,6 @@ class demans extends Model
     protected $fillable = [
         'nama_produk',
         'jumlah_produk',
-        'status_produk'
+        'deskripsi'
     ];
 }

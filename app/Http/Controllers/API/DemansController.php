@@ -22,7 +22,7 @@ class DemansController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'List data permintaan barang',
-            'data' => $demans  
+            'data' => $demans
         ], Response::HTTP_OK);
         //
     }
@@ -46,10 +46,8 @@ class DemansController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'id_permintaan' => ['required'],
             'nama_produk' => ['required'],
             'jumlah_produk' => ['required'],
-            'status_produk' => ['required', 'in:Diproses,Dikemas,Dikirim,Diterima'],
         ]);
 
         if ($validator->fails()) {
@@ -58,7 +56,7 @@ class DemansController extends Controller
                 $validator->errors(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        
+
         try {
             $demans = demans::create($request->all());
             return response()->json([
@@ -131,10 +129,8 @@ class DemansController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            // 'id_permintaan' => ['required'],
             'nama_produk' => ['required'],
             'jumlah_produk' => ['required'],
-            'status_produk' => ['required', 'in:Diproses,Dikemas,Dikirim,Diterima'],
         ]);
 
         if ($validator->fails()) {
