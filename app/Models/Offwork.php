@@ -27,11 +27,11 @@ class Offwork extends Model
 
     public function getTanggalCuti()
     {
-        return Carbon::parse($this->attributes['tanggal_cuti'])->translatedFormat('j F Y');
+        return Carbon::createFromDate($this->attributes['tanggal_cuti'])->translatedFormat('j F Y');
     }
 
     public function getTanggalKembali()
     {
-        return Carbon::parse($this->attributes['tanggal_kembali'])->translatedFormat('j F Y');
+        return Carbon::createFromDate($this->attributes['tanggal_kembali'])->translatedFormat('j F Y');
     }
 }
