@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_reports', function (Blueprint $table) {
-            $table->id()->startingValue(rand());
-            $table->integer('id_produksi');
-            $table->enum('status_produksi',['Success','Failed']);
-            $table->string('judul_laporan');
-            $table->integer('biaya_produksi');
-            $table->string('lampiran');
+        Schema::create('pencairans', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_pengajuan');
+            $table->foreign('id_pengajuan')->references('id')->on('pengajuans');
+            $table->integer('jml_dana_keluar');
+            $table->date('tanggal_pencairan');
             $table->string('keterangan');
+            $table->string('bukti');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_reports');
+        Schema::dropIfExists('pencairans');
     }
 };
