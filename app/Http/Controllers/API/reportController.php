@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\salesreport;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmployeeController extends Controller
+class reportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $salesreport = salesreport::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data karyawan',
-            'data' => $employees
+            'message' => 'List laporan penjualan',
+            'data' => $salesreport
         ], Response::HTTP_OK);
     }
 
@@ -45,16 +45,11 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'tempat_lahir' => ['required'],
-            'tanggal_lahir' => ['required', 'date'],
-            'jenis_kelamin' => ['required', 'in:Pria,Wanita'],
-            'status_pernikahan' => ['required', 'in:Menikah,Lajang'],
-            'email' => ['required', 'email:dns'],
-            'nomor_hp' => ['required'],
-            'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'tanggal_penjualan' => ['required', 'date'],
+            'harga_produk' => ['required'],
+            'jumlah_penjualan' => ['required'],
+            'strategi' => ['required'],
+            'status_target' => ['required','in:Tercapai,Tidak Tercapai'],
         ]);
 
         if ($validator->fails()) {
@@ -65,16 +60,23 @@ class EmployeeController extends Controller
         }
 
         try {
-            $employee = Employee::create($request->all());
+            $salesreport = salesreport::create([
+                'tanggal_penjualan'=> $request->tanggal_penjualan,
+                'harga_produk' => $request->harga_produk,
+                'jumlah_penjualan' =>$request->jumlah_penjualan,
+                'total_pendapatan'=>$request->harga_produk * $request->jumlah_penjualan,
+                'strategi' =>$request->strategi,
+                'status_target' =>$request->status_target
+            ]);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil ditambahkan',
-                'data' => $employee
+                'message' => 'Data laporan penjualan berhasil ditambahkan',
+                'data' => $salesreport
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal ditambahkan',
+                'message' => 'Data laporan penjualan gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -88,18 +90,19 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $salesreport = salesreport::find($id);
+
+        if (is_null($salesreport)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data laporan penjualan tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail data karyawan',
-            'data' => $employee
+            'message' => 'Detail laporan penjualan',
+            'data' => $salesreport
         ], Response::HTTP_OK);
     }
 
@@ -123,26 +126,21 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $salesreport = salesreport::find($id);
+
+        if (is_null($salesreport)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data laporan penjualan tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'tempat_lahir' => ['required'],
-            'tanggal_lahir' => ['required', 'date'],
-            'jenis_kelamin' => ['required', 'in:Pria,Wanita'],
-            'status_pernikahan' => ['required', 'in:Menikah,Lajang'],
-            'email' => ['required', 'email:dns'],
-            'nomor_hp' => ['required'],
-            'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'status' => ['required', 'in:Aktif,Resign'],
+            'tanggal_penjualan' => ['required', 'date'],
+            'harga_produk' => ['required'],
+            'jumlah_penjualan' => ['required'],
+            'strategi' => ['required'],
+            'status_target' => ['required', 'in:Tercapai,Tidak tercapai'],
         ]);
 
         if ($validator->fails()) {
@@ -153,16 +151,23 @@ class EmployeeController extends Controller
         }
 
         try {
-            $employee->update($request->all());
+            $salesreport->update([
+                'tanggal_penjualan'=> $request->tanggal_penjualan,
+                'harga_produk' => $request->harga_produk,
+                'jumlah_penjualan' =>$request->jumlah_penjualan,
+                'total_pendapatan'=>$request->harga_produk * $request->jumlah_penjualan,
+                'strategi' =>$request->strategi,
+                'status_target' =>$request->status_target
+            ]);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil diupdate',
-                'data' => $employee
+                'message' => 'Data laporan penjualan berhasil diupdate',
+                'data' => $salesreport
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal diupdate',
+                'message' => 'Data laporan penjualan gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -176,24 +181,25 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $salesreport = salesreport::find($id);
+
+        if (is_null($salesreport)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data laporan penjualan tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $employee->delete();
+            $salesreport->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil dihapus',
+                'message' => 'Data laporan penjualan berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal dihapus',
+                'message' => 'Data laporan penjualan gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

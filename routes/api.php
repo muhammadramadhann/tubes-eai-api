@@ -76,4 +76,4 @@ Route::put('/material/{id}', [MaterialController::class, 'update']);
 Route::delete('/material/{id}', [MaterialController::class, 'destroy']);
 
 // rencana produksi
-Route::apiResource('/production-plan', [ProductionPlanController::class]);
+Route::Apiresource('/production-plan', ProductionPlanController::class);

@@ -4,12 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\Offwork;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmployeeController extends Controller
+class OffworkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +19,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $offworks = Offwork::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data karyawan',
-            'data' => $employees
+            'message' => 'List data absensi karyawan',
+            'data' => $offworks
         ], Response::HTTP_OK);
     }
 
@@ -45,16 +46,11 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'tempat_lahir' => ['required'],
-            'tanggal_lahir' => ['required', 'date'],
-            'jenis_kelamin' => ['required', 'in:Pria,Wanita'],
-            'status_pernikahan' => ['required', 'in:Menikah,Lajang'],
-            'email' => ['required', 'email:dns'],
-            'nomor_hp' => ['required'],
-            'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'id_karyawan' => ['required'],
+            'kategori_cuti' => ['required'],
+            'tanggal_cuti' => ['required', 'date'],
+            'tanggal_kembali' => ['required', 'date'],
+            'deskripsi' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -64,17 +60,25 @@ class EmployeeController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        $employee = Employee::find($request->id_karyawan);
+        if (is_null($employee)) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'ID karyawan tidak ditemukan',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
         try {
-            $employee = Employee::create($request->all());
+            $offwork = Offwork::create($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil ditambahkan',
-                'data' => $employee
+                'message' => 'Pengajuan cuti berhasil diajukan dan akan ditinjau',
+                'data' => $offwork
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal ditambahkan',
+                'message' => 'Pengajuan cuti gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -88,18 +92,18 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $offwork = Offwork::find($id);
+        if (is_null($offwork)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pengajuan cuti tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail data karyawan',
-            'data' => $employee
+            'message' => 'Detail pengajuan cuti',
+            'data' => $offwork
         ], Response::HTTP_OK);
     }
 
@@ -123,26 +127,20 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $offwork = Offwork::find($id);
+        if (is_null($offwork)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pengajuan cuti tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'tempat_lahir' => ['required'],
-            'tanggal_lahir' => ['required', 'date'],
-            'jenis_kelamin' => ['required', 'in:Pria,Wanita'],
-            'status_pernikahan' => ['required', 'in:Menikah,Lajang'],
-            'email' => ['required', 'email:dns'],
-            'nomor_hp' => ['required'],
-            'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'status' => ['required', 'in:Aktif,Resign'],
+            'id_karyawan' => ['required'],
+            'kategori_cuti' => ['required'],
+            'tanggal_cuti' => ['required', 'date'],
+            'tanggal_kembali' => ['required', 'date'],
+            'deskripsi' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -152,17 +150,25 @@ class EmployeeController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        $employee = Employee::find($request->id_karyawan);
+        if (is_null($employee)) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'ID karyawan tidak ditemukan',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
         try {
-            $employee->update($request->all());
+            $offwork->update($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil diupdate',
-                'data' => $employee
-            ], Response::HTTP_OK);
+                'message' => 'Data pengajuan cuti berhasil diupdate',
+                'data' => $offwork
+            ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal diupdate',
+                'message' => 'Data pengajuan cuti gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -176,24 +182,24 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        if (is_null($employee)) {
+        $offwork = Offwork::find($id);
+        if (is_null($offwork)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan tidak ditemukan',
+                'message' => 'Data pengajuan cuti tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $employee->delete();
+            $offwork->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data karyawan berhasil dihapus',
+                'message' => 'Data pengajuan cuti berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data karyawan gagal dihapus',
+                'message' => 'Data pengajuan cuti gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
