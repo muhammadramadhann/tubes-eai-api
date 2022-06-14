@@ -11,6 +11,7 @@ use App\Http\Controllers\API\PenggajianController;
 use App\Http\Controllers\API\ProductionPlanController;
 use App\Http\Controllers\API\ProductionReportController;
 use App\Http\Controllers\API\DataprodukController;
+use App\Http\Controllers\API\ProductionRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,9 @@ Route::Apiresource('/production-report', ProductionReportController::class);
 
 // rencana produksi
 Route::apiResource('/production-plan', ProductionPlanController::class);
+
+// reqeust materian
+Route::apiResource('/material-request', ProductionRequestController::class);
 
 // pengajuan dana
 Route::get('/pengajuan', [PengajuanController::class, 'index']);

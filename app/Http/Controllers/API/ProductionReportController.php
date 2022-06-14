@@ -83,11 +83,11 @@ class ProductionReportController extends Controller
         //check if image is not empty
         if ($request->hasFile('lampiran')) {
 
-            //upload image
+            //upload file
             $lampiran = $request->file('image');
             $lampiran->storeAs('public/file', $lampiran->hashName());
 
-            //delete old image
+            //delete old file
             Storage::delete('public/file/'.$prod->lampiran);
 
             //update post with new image
@@ -120,7 +120,7 @@ class ProductionReportController extends Controller
     {
         //delete column
         $prod = ProductionReport::find($id);
-        Storage::delete('public/file/'.$prod->lampiran);
+        // Storage::delete('public/file/'.$prod->lampiran);
         $prod->delete();
 
         //return response
