@@ -6,6 +6,7 @@ use App\Models\ProductionReport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductionPlanResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductionReportController extends Controller
@@ -87,19 +88,18 @@ class ProductionReportController extends Controller
             $lampiran = $request->file('image');
             $lampiran->storeAs('public/file', $lampiran->hashName());
 
-            //delete old file
-            Storage::delete('public/file/'.$prod->lampiran);
+            //delete old image
+            Storage::delete('public/file/' . $prod->lampiran);
 
             //update post with new image
             $prod->update([
-                'lampiran'     => $file->hashName(),
+                'lampiran'     => $lampiran->hashName(),
                 'id_produksi'     => $request->id_produksi,
                 'status_produksi'   => $request->status_produksi,
                 'judul_laporan' => $request->judul_laporan,
                 'biaya_produksi' => $request->biaya_produksi,
                 'keterangan' => $request->keterangan
             ]);
-
         } else {
 
             //update post without image
@@ -120,11 +120,10 @@ class ProductionReportController extends Controller
     {
         //delete column
         $prod = ProductionReport::find($id);
-        // Storage::delete('public/file/'.$prod->lampiran);
+        Storage::delete('public/file/' . $prod->lampiran);
         $prod->delete();
 
         //return response
         return new ProductionPlanResource(true, 'Data Laporan Produksi Berhasil Dihapus!', null);
     }
-
 }

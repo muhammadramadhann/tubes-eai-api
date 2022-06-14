@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal_cuti');
             $table->date('tanggal_kembali');
             $table->string('deskripsi', 500);
-            $table->enum('status', ['Dalam proses', 'Disetujui', 'Tidak disetujui']);
+            $table->enum('status', ['Dalam proses', 'Disetujui', 'Tidak disetujui'])->default('Dalam proses');
             $table->timestamps();
         });
     }

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Dataproduk;
+use App\Models\demans;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-
-class DataprodukController extends Controller
+class DemansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +18,13 @@ class DataprodukController extends Controller
      */
     public function index()
     {
-        $dataproduk = Dataproduk::all();
+        $demans = demans::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List Data Permintaan Produk',
-            'data' => $dataproduk
+            'message' => 'List data permintaan barang',
+            'data' => $demans
         ], Response::HTTP_OK);
+        //
     }
 
     /**
@@ -47,7 +47,7 @@ class DataprodukController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_produk' => ['required'],
-            'ketersediaan_produk' => ['required', 'in:Tersedia,Tidak tersedia'],
+            'jumlah_produk' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -58,19 +58,20 @@ class DataprodukController extends Controller
         }
 
         try {
-            $dataproduk = Dataproduk::create($request->all());
+            $demans = demans::create($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data permintaan produk berhasil ditambahkan',
-                'data' => $dataproduk
+                'message' => 'Data permintaan barang berhasil ditambahkan',
+                'data' => $demans
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk gagal ditambahkan',
+                'message' => 'Data permintaan barang gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 
     /**
@@ -81,19 +82,21 @@ class DataprodukController extends Controller
      */
     public function show($id)
     {
-        $dataproduk = Dataproduk::find($id);
-        if (is_null($dataproduk)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail data permintaan produk',
-            'data' => $dataproduk
+            'message' => 'Detail data permintaan barang',
+            'data' => $demans
         ], Response::HTTP_OK);
+        //
     }
 
     /**
@@ -116,17 +119,18 @@ class DataprodukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataproduk = Dataproduk::find($id);
-        if (is_null($dataproduk)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
             'nama_produk' => ['required'],
-            'ketersediaan_produk' => ['required', 'in:Tersedia,Tidak tersedia'],
+            'jumlah_produk' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -137,19 +141,20 @@ class DataprodukController extends Controller
         }
 
         try {
-            $dataproduk->update($request->all());
+            $demans->update($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data permintaan produk berhasil diupdate',
-                'data' => $dataproduk
+                'message' => 'Data permintaan barang berhasil diupdate',
+                'data' => $demans
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk gagal diupdate',
+                'message' => 'Data permintaan barang gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 
     /**
@@ -160,26 +165,27 @@ class DataprodukController extends Controller
      */
     public function destroy($id)
     {
-        $dataproduk = Dataproduk::find($id);
-        if (is_null($dataproduk)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
-
         try {
-            $dataproduk->delete();
+            $demans->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data permintaan produk berhasil dihapus',
+                'message' => 'Data permintaan barang berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data permintaan produk gagal dihapus',
+                'message' => 'Data permintaan barang gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 }

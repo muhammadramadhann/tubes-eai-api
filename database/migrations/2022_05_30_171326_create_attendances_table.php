@@ -20,7 +20,7 @@ return new class extends Migration
             $table->time('absensi_masuk');
             $table->time('absensi_keluar')->nullable();
             $table->string('deskripsi', 500);
-            $table->enum('status', ['Dalam verifikasi', 'Sudah diverifikasi', 'Absensi tidak valid']);
+            $table->enum('status', ['Dalam verifikasi', 'Sudah diverifikasi', 'Absensi tidak valid'])->default('Dalam verifikasi');
             $table->timestamps();
         });
     }
