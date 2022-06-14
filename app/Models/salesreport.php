@@ -9,7 +9,7 @@ class salesreport extends Model
 {
     use HasFactory;
 
-    protected $table = 'salesreport';
+    protected $table = 'salesreports';
     protected $fillable = [
         'tanggal_penjualan',
         'harga_produk',
