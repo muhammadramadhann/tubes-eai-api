@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('dataproduks', function (Blueprint $table) {
             $table->id();
-            $table->string('ketersediaan_produk');
-            $table->string('status_pengiriman_kepada_scm');
-            $table->string('status_produk');
+            $table->string('nama_produk');
+            $table->enum('ketersediaan_produk', ['Tersedia', 'Tidak tersedia']);
+            $table->integer('jumlah_stok')->default(0);
             $table->timestamps();
         });
     }

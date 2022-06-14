@@ -14,11 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('demans', function (Blueprint $table) {
-            $table->id()->startingValue(rand());
-            $table->string('id_permintaan');
+            $table->id();
             $table->string('nama_produk');
             $table->integer('jumlah_produk');
-            $table->enum('status_produk',['Dikemas', 'Diproses','Dikirim','Diterima']);
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }
