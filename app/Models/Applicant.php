@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Applicant extends Model
 {
@@ -23,4 +24,9 @@ class Applicant extends Model
         'pilihan_divisi',
         'status'
     ];
+
+    public function getTanggalLahirAttribute()
+    {
+        return Carbon::createFromDate($this->attributes['tanggal_lahir'])->translatedFormat('j F Y');
+    }
 }

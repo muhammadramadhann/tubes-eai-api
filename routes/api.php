@@ -14,6 +14,7 @@ use App\Http\Controllers\API\ProductionPlanController;
 use App\Http\Controllers\API\ProductionReportController;
 use App\Http\Controllers\API\DataprodukController;
 use App\Http\Controllers\API\ProductionRequestController;
+use App\Http\Controllers\API\ResignController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,10 +47,7 @@ Route::get('/applicant/{id}', [ApplicantController::class, 'show']);
 Route::put('/applicant/{id}', [ApplicantController::class, 'update']);
 Route::delete('/applicant/{id}', [ApplicantController::class, 'destroy']);
 
-
-
 // absensi karyaan
-
 Route::get('/attendance', [AttendanceController::class, 'index']);
 Route::post('/attendance', [AttendanceController::class, 'store']);
 Route::get('/attendance/{id}', [AttendanceController::class, 'show']);
@@ -62,6 +60,13 @@ Route::post('/offwork', [OffworkController::class, 'store']);
 Route::get('/offwork/{id}', [OffworkController::class, 'show']);
 Route::put('/offwork/{id}', [OffworkController::class, 'update']);
 Route::delete('/offwork/{id}', [OffworkController::class, 'destroy']);
+
+// resign karyawan
+Route::get('/resign', [ResignController::class, 'index']);
+Route::post('/resign', [ResignController::class, 'store']);
+Route::get('/resign/{id}', [ResignController::class, 'show']);
+Route::put('/resign/{id}', [ResignController::class, 'update']);
+Route::delete('/resign/{id}', [ResignController::class, 'destroy']);
 
 // pembelian bahan baku
 Route::get('/material', [MaterialController::class, 'index']);

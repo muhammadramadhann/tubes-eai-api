@@ -22,15 +22,15 @@ class Offwork extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'id_karyawan');
+        return $this->belongsTo(Employee::class, 'id_karyawan');
     }
 
-    public function getTanggalCuti()
+    public function getTanggalCutiAttribute()
     {
         return Carbon::createFromDate($this->attributes['tanggal_cuti'])->translatedFormat('j F Y');
     }
 
-    public function getTanggalKembali()
+    public function getTanggalKembaliAttribute()
     {
         return Carbon::createFromDate($this->attributes['tanggal_kembali'])->translatedFormat('j F Y');
     }

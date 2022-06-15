@@ -35,12 +35,12 @@ class Employee extends Model
         return $this->hasMany(Offwork::class);
     }
 
-    public function getTanggalLahir()
+    public function getTanggalLahirAttribute()
     {
         return Carbon::createFromDate($this->attributes['tanggal_lahir'])->translatedFormat('j F Y');
     }
 
-    public function getTanggalBergabung()
+    public function getTanggalBergabungAttribute()
     {
         return Carbon::createFromDate($this->attributes['tanggal_bergabung'])->translatedFormat('j F Y');
     }
