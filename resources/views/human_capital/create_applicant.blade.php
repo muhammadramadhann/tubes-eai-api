@@ -132,7 +132,7 @@
                     </div>
                 </section>
                 <section id="button" class="d-lg-flex d-block">
-                    <button type="submit" class="btn btn-secondary me-2">Reset</button>
+                    <button type="reset" class="btn btn-secondary me-2">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit Data</button>
                 </section>
             </form>

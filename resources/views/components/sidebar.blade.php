@@ -14,13 +14,13 @@
                     Human Capital
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse {{ Request::is('karyawan', 'karyawan/*', 'pelamar', 'pelamar/*', 'absensi', 'absensi/*', 'pengajuan-cuti', 'pengajuan-cuti/*') ? 'show' : '' }}" id="collapseHc" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('karyawan', 'karyawan/*', 'pelamar', 'pelamar/*', 'absensi', 'absensi/*', 'pengajuan-cuti', 'pengajuan-cuti/*', 'resign' , 'resign/*') ? 'show' : '' }}" id="collapseHc" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('karyawan', 'karyawan/*') ? 'active' : '' }}" href="/karyawan">Karyawan</a>
+                        <a class="nav-link {{ Request::is('absensi', 'absensi/*') ? 'active' : '' }}" href="/absensi">Absensi</a>
+                        <a class="nav-link {{ Request::is('pengajuan-cuti', 'pengajuan-cuti/*') ? 'active' : '' }}" href="/pengajuan-cuti">Pengajuan Cuti</a>
+                        <a class="nav-link {{ Request::is('resign', 'resign/*') ? 'active' : '' }}" href="/resign">Resign</a>
                         <a class="nav-link {{ Request::is('pelamar', 'pelamar/*') ? 'active' : '' }}" href="/pelamar">Pelamar</a>
-                        <a class="nav-link" href="/absensi">Absensi</a>
-                        <a class="nav-link" href="/pengajuan-cuti">Pengajuan Cuti</a>
-                        <a class="nav-link" href="">Resign</a>
                     </nav>
                 </div>
 

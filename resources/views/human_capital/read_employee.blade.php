@@ -9,7 +9,7 @@
     </ol>
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold mb-md-0 mb-2">Data Karyawan</h3>
+        <h4 class="fw-bold mb-md-0 mb-2">Data Karyawan</h4>
         <a href="{{ Route('karyawan.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     @if (session('success'))
@@ -49,15 +49,15 @@
                 <tbody>
                     @foreach ($employees as $employee)
                         <tr>
-                            <td>{{ $employee["id"] }}</td>
-                            <td>{{ $employee["nama"] }}</td>
-                            <td>{{ Carbon\Carbon::createFromDate($employee["tanggal_bergabung"])->translatedFormat('j F Y') }}</td>
-                            <td>{{ $employee["divisi"] }}</td>
-                            <td>{{ $employee["status"] }}</td>
+                            <td>{{ $employee->id }}</td>
+                            <td>{{ $employee->nama }}</td>
+                            <td>{{ Carbon\Carbon::createFromDate($employee->tanggal_bergabung)->translatedFormat('j F Y') }}</td>
+                            <td>{{ $employee->divisi }}</td>
+                            <td>{{ $employee->status }}</td>
                             <td>
-                                <a href="{{ Route('karyawan.edit', $employee["id"]) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
+                                <a href="{{ Route('karyawan.edit', $employee->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
                                 <span class="text-muted d-lg-inline d-none">|</span>
-                                <form action="{{ Route('karyawan.delete', $employee["id"]) }}" method="POST" class="d-inline">
+                                <form action="{{ Route('karyawan.delete', $employee->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <button type="submit" class="btn btn-danger btn-sm text-decoration-none">Hapus</button>

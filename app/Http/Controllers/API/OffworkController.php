@@ -47,7 +47,7 @@ class OffworkController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required'],
+            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
             'tanggal_cuti' => ['required', 'date'],
             'tanggal_kembali' => ['required', 'date'],
             'deskripsi' => ['required'],
@@ -137,10 +137,11 @@ class OffworkController extends Controller
 
         $validator = Validator::make($request->all(), [
             'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required'],
+            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
             'tanggal_cuti' => ['required', 'date'],
             'tanggal_kembali' => ['required', 'date'],
             'deskripsi' => ['required'],
+            'status' => ['in:Dalam proses,Disetujui,Ditolak']
         ]);
 
         if ($validator->fails()) {

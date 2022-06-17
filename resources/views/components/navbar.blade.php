@@ -1,3 +1,17 @@
+<style>
+    @media screen and (max-width: 767px) {
+        .navbar-brand {
+            font-size: 1.1rem;
+            width: 150px !important;
+        }
+    }
+    
+    @media screen and (max-width: 500px) {
+        a.nav-link.text-danger small {
+            font-size: 0.8rem;
+        }
+    }
+</style>
 <nav class="sb-topnav navbar px-4 navbar-expand navbar-light bg-white border-bottom">
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -6,7 +20,7 @@
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto me-lg-0 me-2">
         <li class="nav-item dropdown">
-            <a href="#" class="nav-link text-danger" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+            <a href="#" class="nav-link text-danger" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal"><small><i class="fas fa-sign-out-alt me-sm-2 me-1"></i>Logout</small></a>
         </li>
     </ul>
 </nav>
@@ -20,7 +34,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Apakah yakin ingin logout dari dashboard ini?
+                    Apakah Anda yakin ingin logout?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

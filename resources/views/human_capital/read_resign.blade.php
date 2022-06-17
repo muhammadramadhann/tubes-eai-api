@@ -1,16 +1,16 @@
 @extends('layouts.base')
 
-@section('title', 'HC | Data Pelamar')
+@section('title', 'HC | Data Resign')
 
 @section('content')
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="/"><small>Dashboard</small></a></li>
-        <li class="breadcrumb-item active"><small>Pelamar</small></li>
+        <li class="breadcrumb-item active"><small>Permohonan Resign</small></li>
     </ol>
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-3">
-        <h4 class="fw-bold mb-md-0 mb-2">Data Pelamar</h4>
-        <a href="{{ Route('pelamar.create') }}" class="btn btn-primary">Tambah Data</a>
+        <h4 class="fw-bold mb-md-0 mb-2">Data Permohonan Resign Karyawan</h4>
+        <a href="{{ Route('resign.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -38,26 +38,24 @@
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>ID Karyawan</th>
                         <th>Nama</th>
-                        <th>Pendidikan Terakhir</th>
-                        <th>Pilihan Divisi</th>
-                        <th>Status</th>
+                        <th>Alasan Resign</th>
+                        <th>status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($applicants as $applicant)
+                    @foreach ($resigns as $resign)
                         <tr>
-                            <td>{{ $applicant->id }}</td>
-                            <td>{{ $applicant->nama }}</td>
-                            <td>{{ $applicant->pendidikan_terakhir }}</td>
-                            <td>{{ $applicant->pilihan_divisi }}</td>
-                            <td>{{ $applicant->status }}</td>
+                            <td>{{ $resign->id_karyawan }}</td>
+                            <td>{{ $resign->employee->nama ?? 'None' }}</td>
+                            <td>{{ $resign->alasan_resign }}</td>
+                            <td>{{ $resign->status }}</td>
                             <td>
-                                <a href="{{ Route('pelamar.edit', $applicant->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
+                                <a href="{{ Route('resign.edit', $resign->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
                                 <span class="text-muted d-lg-inline d-none">|</span>
-                                <form action="{{ Route('pelamar.delete', $applicant->id) }}" method="POST" class="d-inline">
+                                <form action="{{ Route('resign.delete', $resign->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <button type="submit" class="btn btn-danger btn-sm text-decoration-none">Hapus</button>

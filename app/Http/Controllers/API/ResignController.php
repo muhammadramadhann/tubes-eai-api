@@ -137,7 +137,7 @@ class ResignController extends Controller
             'id_karyawan' => ['required'],
             'alasan_resign' => ['required', 'in:Melanjutkan pendidikan,Perubahan karir,Permasalahan gaji,Keluarga,Lainnya'],
             'deskripsi' => ['required'],
-            'status' => ['required', 'in:Dalam proses,Disetuji,Ditolak']
+            'status' => ['in:Dalam proses,Disetujui,Ditolak']
         ]);
 
         if ($validator->fails()) {

@@ -128,6 +128,6 @@ class ApplicantViewController extends Controller
             return Redirect::route('pelamar')->with('success', 'Data pelamar berhasil dihapus');
         }
 
-        return Redirect::route('pelamar')->with('fail', 'Data pelamar gagal diupdate');
+        return Redirect::route('pelamar')->with('fail', 'Data pelamar gagal dihapus');
     }
 }

@@ -140,6 +140,7 @@ class AttendanceController extends Controller
             'absensi_masuk' => ['required'],
             'absensi_keluar' => ['required'],
             'deskripsi' => ['required'],
+            'status' => ['in:Dalam verifikasi,Sudah diverifikasi,Absensi tidak valid']
         ]);
 
         if ($validator->fails()) {
