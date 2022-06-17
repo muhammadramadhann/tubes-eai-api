@@ -17,7 +17,7 @@
                 <div class="collapse {{ Request::is('karyawan', 'karyawan/*', 'pelamar', 'pelamar/*', 'absensi', 'absensi/*', 'pengajuan-cuti', 'pengajuan-cuti/*') ? 'show' : '' }}" id="collapseHc" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('karyawan', 'karyawan/*') ? 'active' : '' }}" href="/karyawan">Karyawan</a>
-                        <a class="nav-link" href="/pelamar">Pelamar</a>
+                        <a class="nav-link {{ Request::is('pelamar', 'pelamar/*') ? 'active' : '' }}" href="/pelamar">Pelamar</a>
                         <a class="nav-link" href="/absensi">Absensi</a>
                         <a class="nav-link" href="/pengajuan-cuti">Pengajuan Cuti</a>
                         <a class="nav-link" href="">Resign</a>

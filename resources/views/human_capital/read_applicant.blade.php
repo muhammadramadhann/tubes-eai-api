@@ -4,14 +4,35 @@
 
 @section('content')
     <ol class="breadcrumb my-4">
-        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-        <li class="breadcrumb-item active">Human Resource - Pelamar</li>
+        <li class="breadcrumb-item"><a href="/"><small>Dashboard</small></a></li>
+        <li class="breadcrumb-item active"><small>Pelamar</small></li>
     </ol>
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-3">
         <h3 class="fw-bold mb-md-0 mb-2">Data Pelamar</h3>
-        <a href="" class="btn btn-white bg-light border">Tambah Data</a>
+        <a href="{{ Route('pelamar.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif (session('fail'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('fail') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif (session('success_update'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success_update') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif (session('fail_update'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('fail_update') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="card mb-4">
         <div class="card-body">
             <table id="datatablesSimple">
@@ -19,8 +40,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>Pendidikan</th>
-                        <th>Divisi</th>
+                        <th>Pendidikan Terakhir</th>
+                        <th>Pilihan Divisi</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -28,14 +49,19 @@
                 <tbody>
                     @foreach ($applicants as $applicant)
                         <tr>
-                            <td>{{ $applicant['id'] }}</td>
-                            <td>{{ $applicant['nama'] }}</td>
-                            <td>{{ $applicant['pendidikan_terakhir'] }}</td>
-                            <td>{{ $applicant['pilihan_divisi'] }}</td>
-                            <td>{{ $applicant['status'] }}</td>
+                            <td>{{ $applicant->id }}</td>
+                            <td>{{ $applicant->nama }}</td>
+                            <td>{{ $applicant->pendidikan_terakhir }}</td>
+                            <td>{{ $applicant->pilihan_divisi }}</td>
+                            <td>{{ $applicant->status }}</td>
                             <td>
-                                <a href="update/{{ $applicant['id'] }}" class="btn btn-warning text-white me-2 mb-lg-0 mb-2"><i class="fas fa-edit"></i></a>
-                                <a href="" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{ Route('pelamar.edit', $applicant->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
+                                <span class="text-muted d-lg-inline d-none">|</span>
+                                <form action="{{ Route('pelamar.delete', $applicant->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="btn btn-danger btn-sm text-decoration-none">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

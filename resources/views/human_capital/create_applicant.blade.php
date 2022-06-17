@@ -1,27 +1,27 @@
 @extends('layouts.base')
 
-@section('title', 'HC | Tambah Data Karyawan')
+@section('title', 'HC | Tambah Data Pelamar')
 
 @section('content')
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="/"><small>Dashboard</small></a></li>
-        <li class="breadcrumb-item active"><a href="/karyawan"><small>Karyawan</small></a></li>
-        <li class="breadcrumb-item active"><small>Tambah Data Karyawan</small></li>
+        <li class="breadcrumb-item active"><a href="/pelamar"><small>Pelamar</small></a></li>
+        <li class="breadcrumb-item active"><small>Tambah Data Pelamar</small></li>
     </ol>
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-5">
-        <h4 class="fw-bold mb-md-0 mb-2">Tambah Data Karyawan</h4>
+        <h4 class="fw-bold mb-md-0 mb-2">Tambah Data Pelamar</h4>
     </div>
     <div class="row mb-5">
         <div class="col-lg-7 col-12">
-            <form action="{{ Route('karyawan.create') }}" method="POST">
+            <form action="{{ Route('pelamar.create') }}" method="POST">
                 @csrf
                 <section id="personal-data" class="mb-4">
                     <h5 class="fw-bold">Personal data</h5>
-                    <p class="text-muted"><small>Isi seluruh data informasi personal karyawan</small></p>
+                    <p class="text-muted"><small>Isi seluruh data informasi personal pelamar</small></p>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap Karyawan">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap Pelamar">
                         @error('nama')
                             <div class="text-danger mt-2">
                                 {{ $message }}
@@ -101,12 +101,12 @@
                     </div>
                 </section>
                 <section id="employment-data" class="mb-5">
-                    <h5 class="fw-bold">Employment data</h5>
-                    <p class="text-muted"><small>Isi seluruh data informasi pekerjaan karyawan</small></p>
+                    <h5 class="fw-bold">Applicant data</h5>
+                    <p class="text-muted"><small>Isi seluruh data informasi calon pelamar pekerjaan</small></p>
                     <div class="row mb-3">
                         <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="divisi" class="form-label">Divisi</label>
-                            <select class="form-select" id="divisi" name="divisi" aria-label="Default select example" value="{{ old('divisi') }}">
+                            <label for="pilihan_divisi" class="form-label">Pilihan Divisi</label>
+                            <select class="form-select" id="pilihan_divisi" name="pilihan_divisi" aria-label="Default select example" value="{{ old('pilihan_divisi') }}">
                                 <option selected disabled>-- Pilih divisi --</option>
                                 <option value="Marketing">Marketing</option>
                                 <option value="Finance">Finance</option>
@@ -114,16 +114,16 @@
                                 <option value="SCM">SCM</option>
                                 <option value="HC">HC</option>
                             </select>
-                            @error('divisi')
+                            @error('pilihan_divisi')
                                 <div class="text-danger mt-2">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="col-md-5 col-12">
-                            <label for="tanggal_bergabung" class="form-label">Tanggal Bergabung</label>
-                            <input type="date" class="form-control" id="tanggal_bergabung" name="tanggal_bergabung" value="{{ old('tanggal_bergabung') }}">
-                            @error('tanggal_bergabung')
+                            <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir</label>
+                            <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" value="{{ old('pendidikan_terakhir') }}" placeholder="S1 Sistem Informasi">
+                            @error('pendidikan_terakhir')
                                 <div class="text-danger mt-2">
                                     {{ $message }}
                                 </div>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class EmployeeViewController extends Controller
+class ApplicantViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class EmployeeViewController extends Controller
      */
     public function index()
     {
-        $employees = Employee::orderBy('id', 'DESC')->get();
-        return view('human_capital.read_employee', ['employees' => $employees]);
+        $applicants = Applicant::orderBy('id', 'DESC')->get();
+        return view('human_capital.read_applicant', ['applicants' => $applicants]);
     }
 
     /**
@@ -27,7 +27,7 @@ class EmployeeViewController extends Controller
      */
     public function create()
     {
-        return view('human_capital.create_employee');
+        return view('human_capital.create_applicant');
     }
 
     /**
@@ -47,16 +47,16 @@ class EmployeeViewController extends Controller
             'email' => ['required', 'email:dns'],
             'nomor_hp' => ['required'],
             'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'pendidikan_terakhir' => ['required'],
+            'pilihan_divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
         ]);
 
-        $employee = Employee::create($request->all());
-        if ($employee) {
-            return Redirect::route('karyawan')->with('success', 'Data karyawan berhasil ditambahkan');
+        $applicant = Applicant::create($request->all());
+        if ($applicant) {
+            return Redirect::route('pelamar')->with('success', 'Data pelamar berhasil ditambahkan');
         }
 
-        return Redirect::route('karyawan')->with('fail', 'Data karyawan gagal ditambahkan');
+        return Redirect::route('pelamar')->with('fail', 'Data pelamar gagal ditambahkan');
     }
 
     /**
@@ -78,8 +78,8 @@ class EmployeeViewController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::where('id', $id)->first();
-        return view('human_capital.update_employee', ['employee' => $employee]);
+        $applicant = Applicant::where('id', $id)->first();
+        return view('human_capital.update_applicant', ['applicant' => $applicant]);
     }
 
     /**
@@ -100,18 +100,18 @@ class EmployeeViewController extends Controller
             'email' => ['required', 'email:dns'],
             'nomor_hp' => ['required'],
             'alamat' => ['required'],
-            'tanggal_bergabung' => ['required', 'date'],
-            'divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
-            'status' => ['required', 'in:Aktif,Resign'],
+            'pendidikan_terakhir' => ['required'],
+            'pilihan_divisi' => ['required', 'in:Marketing,Finance,IT,SCM,HC'],
+            'status' => ['in:Dalam seleksi,Lolos,Tidak lolos'],
         ]);
 
-        $employee = Employee::where('id', $id)->first();
-        $update = $employee->update($request->all());
+        $applicant = Applicant::where('id', $id)->first();
+        $update = $applicant->update($request->all());
         if ($update) {
-            return Redirect::route('karyawan')->with('success', 'Data karyawan berhasil diupdate');
+            return Redirect::route('pelamar')->with('success', 'Data pelamar berhasil diupdate');
         }
 
-        return Redirect::route('karyawan')->with('fail', 'Data karyawan gagal diupdate');
+        return Redirect::route('pelamar')->with('fail', 'Data pelamar gagal diupdate');
     }
 
     /**
@@ -122,12 +122,12 @@ class EmployeeViewController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::where('id', $id)->first();
-        $delete = $employee->delete();
+        $applicant = Applicant::where('id', $id)->first();
+        $delete = $applicant->delete();
         if ($delete) {
-            return Redirect::route('karyawan')->with('success', 'Data karyawan berhasil dihapus');
+            return Redirect::route('pelamar')->with('success', 'Data pelamar berhasil dihapus');
         }
 
-        return Redirect::route('karyawan')->with('fail', 'Data karyawan gagal dihapus');
+        return Redirect::route('pelamar')->with('fail', 'Data pelamar gagal diupdate');
     }
 }

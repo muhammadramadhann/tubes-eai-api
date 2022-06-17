@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController as Login;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Web\ApplicantViewController as ApplicantView;
 use App\Http\Controllers\Web\DashboardController as Dashboard;
 use App\Http\Controllers\Web\EmployeeViewController as EmployeeView;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/', [Dashboard::class, 'index']);
 
-    // human capital | read
+    // human capital | karyawan
     Route::prefix('/karyawan')->group(function () {
         Route::get('/', [EmployeeView::class, 'index'])->name('karyawan');
         Route::get('/create', [EmployeeView::class, 'create'])->name('karyawan.create');
@@ -33,6 +34,16 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/update', [EmployeeView::class, 'edit'])->name('karyawan.edit');
         Route::put('{id}/update', [EmployeeView::class, 'update'])->name('karyawan.update');
         Route::delete('{id}/delete', [EmployeeView::class, 'destroy'])->name('karyawan.delete');
+    });
+
+    // human capital | pelamar
+    Route::prefix('/pelamar')->group(function () {
+        Route::get('/', [ApplicantView::class, 'index'])->name('pelamar');
+        Route::get('/create', [ApplicantView::class, 'create'])->name('pelamar.create');
+        Route::post('/create', [ApplicantView::class, 'store'])->name('pelamar.create');
+        Route::get('{id}/update', [ApplicantView::class, 'edit'])->name('pelamar.edit');
+        Route::put('{id}/update', [ApplicantView::class, 'update'])->name('pelamar.update');
+        Route::delete('{id}/delete', [ApplicantView::class, 'destroy'])->name('pelamar.delete');
     });
 
     // logout

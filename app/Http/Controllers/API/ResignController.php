@@ -137,6 +137,7 @@ class ResignController extends Controller
             'id_karyawan' => ['required'],
             'alasan_resign' => ['required', 'in:Melanjutkan pendidikan,Perubahan karir,Permasalahan gaji,Keluarga,Lainnya'],
             'deskripsi' => ['required'],
+            'status' => ['required', 'in:Dalam proses,Disetuji,Ditolak']
         ]);
 
         if ($validator->fails()) {
@@ -156,6 +157,9 @@ class ResignController extends Controller
 
         try {
             $resign->update($request->all());
+            if ($request->status == 'Disetujui') {
+                $employee->update(['status' => 'Resign']);
+            }
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data permohonan resign berhasil diupdate',
