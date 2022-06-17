@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/create', [EmployeeView::class, 'store'])->name('karyawan.create');
         Route::get('{id}/update', [EmployeeView::class, 'edit'])->name('karyawan.edit');
         Route::put('{id}/update', [EmployeeView::class, 'update'])->name('karyawan.update');
-        Route::delete('{id}/delete', [EmployeeView::class, 'update'])->name('karyawan.delete');
+        Route::delete('{id}/delete', [EmployeeView::class, 'destroy'])->name('karyawan.delete');
     });
 
     // logout

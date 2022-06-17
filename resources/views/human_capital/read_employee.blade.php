@@ -55,9 +55,13 @@
                             <td>{{ $employee["divisi"] }}</td>
                             <td>{{ $employee["status"] }}</td>
                             <td>
-                                <a href="{{ Route('karyawan.edit', $employee["id"]) }}" class="btn btn-light border btn-sm text-decoration-none">Update</a>
-                                <span class="text-muted">|</span>
-                                <a href="{{ Route('karyawan.delete', $employee["id"]) }}" class="btn btn-danger btn-sm text-decoration-none">Hapus</a>
+                                <a href="{{ Route('karyawan.edit', $employee["id"]) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
+                                <span class="text-muted d-lg-inline d-none">|</span>
+                                <form action="{{ Route('karyawan.delete', $employee["id"]) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="btn btn-danger btn-sm text-decoration-none">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -33,8 +33,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employees = Employee::all();
-        return view('human_capital.read_employee', ['employees' => $employees]);
+        //
     }
 
     /**
