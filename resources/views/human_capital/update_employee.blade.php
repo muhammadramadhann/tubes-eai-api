@@ -116,7 +116,7 @@
                                     <option selected disabled>-- Pilih divisi --</option>
                                     <option @if ($employee->divisi == "Marketing") @selected(true) @endif value="Marketing">Marketing</option>
                                     <option @if ($employee->divisi == "Finance") @selected(true) @endif value="Finance">Finance</option>
-                                    <option @if ($employee->divisi == "IT") @selected(true) @endif value="IT">IT</option>
+                                    <option @if ($employee->divisi == "IT") @selected(true) @endif value="IT Team">IT Team</option>
                                     <option @if ($employee->divisi == "SCM") @selected(true) @endif value="SCM">SCM</option>
                                     <option @if ($employee->divisi == "HC") @selected(true) @endif value="HC">HC</option>
                                 </select>

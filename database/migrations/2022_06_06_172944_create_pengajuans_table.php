@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pegawai');
-            $table->enum('divisi',['Human Resource', 'IT Team', 'Marketing', 'SCM', 'Finance']);
+            $table->enum('divisi',['HC', 'IT Team', 'Marketing', 'SCM', 'Finance']);
             $table->string('proposal')->nullable();
             $table->date('tanggal_mengajukan');
             $table->enum('status_pengajuan', ['Tertunda', 'Diterima', 'Diporses', 'Disetujui', 'Ditolak']);

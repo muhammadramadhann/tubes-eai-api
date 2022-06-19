@@ -12,15 +12,15 @@
         }
     }
 </style>
-<nav class="sb-topnav navbar px-4 navbar-expand navbar-light bg-white border-bottom">
+<nav class="sb-topnav navbar px-4 navbar-expand navbar-light  border-bottom" style="background-color: #E0D8B0;">
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Brand-->
-    <a class="navbar-brand fw-bold ms-2" href="/">📌 EAI Easygo</a>
+    <a class="navbar-brand fw-bold ms-2" href="/"><img src=" {{asset('assets/img/logo.png')}}" alt="" width="140" height="50" class="d-inline-block align-text-top" style="margin-left:-20px; "></a>
     <!-- Navbar-->
-    <ul class="navbar-nav ms-auto me-lg-0 me-2">
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link text-danger" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal"><small><i class="fas fa-sign-out-alt me-sm-2 me-1"></i>Logout</small></a>
+    <ul class="navbar-nav ms-auto me-lg-0 me-2" >
+        <li class="nav-item dropdown" style="background-color: #E0D8B0; color:#AE431E;">
+            <a href="#"  class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal"><small style="color: #AE431E;"><i class="fas fa-sign-out-alt me-sm-2 me-1" style="color: #AE431E;"></i>Logout</small></a>
         </li>
     </ul>
 </nav>

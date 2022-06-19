@@ -20,16 +20,17 @@
 
     </head>
     <body class="d-flex flex-column min-vh-100 bg-auth">
-        <div class="container my-5 py-md-5">
+        <div class="container my-8 py-md-5">
             <div class="card auth mx-auto my-auto p-3 shadow-sm">
                 <div class="card-body">
-                    <h4 class="fw-bold">Login</h4>
-                    <p class="mb-4">Untuk dapat mengakses projek silahkan masuk menggunakan akun yang sudah terdaftar.</p>
+               <img src=" {{asset('assets/img/logo.png')}}" alt="" width="140" height="50" class="d-inline-block align-text-top" style="margin-left:-20px; margin-bottom:20px">
+                    <h4 class="fw-bold" style="color: #AE431E;">Login</h4>
+                    <p class="mb-4" style="color: #DEA057;">Untuk dapat mengakses projek silahkan masuk menggunakan akun yang sudah terdaftar.</p>
                     <form action="{{ Route('login') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" autofocus value="{{ old('email') }}">
+                            <label for="email" class="form-label" style="color: #AE431E; ">Email</label>
+                            <input type="email" class="form-control" style="background-color: #FCFFE7; border: 1px solid #DEA057;" id="email" name="email" placeholder="Masukkan email" autofocus value="{{ old('email') }}">
                             @if (session('auth-failed'))
                                 <div class="text-danger mt-2">
                                     {{ session('auth-failed') }}
@@ -42,8 +43,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" value="{{ old('password') }}">
+                            <label for="password" class="form-label" style="color:#AE431E;">Password</label>
+                            <input type="password" class="form-control" style="background-color: #FCFFE7; border: 1px solid #DEA057;"  id="password" name="password" placeholder="Masukkan password" value="{{ old('password') }}">
                             <i class="fa-solid fa-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
                             @if (session('auth-failed'))
                                 <div class="text-danger mt-2">
@@ -58,15 +59,15 @@
                         </div>
                         <div class="float-start">
                             <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                                <label class="form-check-label" for="remember">Remember Me</label>
+                                <input class="form-check-input" style="background-color: #AE431E; border: 1px solid #DEA057; " type="checkbox" name="remember" id="remember">
+                                <label class="form-check-label" for="remember" style="color: #DEA057;">Remember Me</label>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded">Login</button>
+                            <button type="submit" class="btn btn-warning w-100 py-2 fw-bold rounded" style="background-color:#AE431E; color: #FCFFE7">Login</button>
                         </div>
                         <p class="text-center mb-0">Need access to this project?
-                            <a href="" class="text-decoration-none hover-none">Contact us</a>
+                            <a href="" class="text-decoration-none hover-none" style="color:#AE431E">Contact us</a>
                         </p>
                     </form>
                 </div>
