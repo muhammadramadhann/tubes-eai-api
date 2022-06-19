@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\Storage;
 
 class PencairanController extends Controller
 {
@@ -24,19 +24,29 @@ class PencairanController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pengajuan' => ['required'],
-            'jml_dana_keluar' => ['required'],
-            'tanggal_pencairan' => ['required', 'date'],
-            'keterangan' => ['required'],
-            'bukti' => ['required']
+            'id_pengajuan' => 'required',
+            'jml_dana_keluar' => 'required',
+            'tanggal_pencairan' =>  'required', 'date',
+            'keterangan' => 'required', 
+            'bukti' => 'required|mimes:pdf,docs'
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors());       
         }
+          //upload file
+          $file = $request->file('bukti');
+          $file->storeAs('public/asset/', $file->hashName());
+  
 
         try {
-            $pencairan = Pencairan::create($request->all());
+            $pencairan = Pencairan::create([
+                'id_pengajuan' =>$request->id_pengajuan,
+                'jml_dana_keluar' =>$request->jml_dana_keluar,
+                'tanggal_pencairan' =>$request->tanggal_pencairan,
+                'keterangan' =>$request->keterangan, 
+                'bukti' =>$file->hashName()
+            ]);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data Pencairan Dana Berhasil Ditambahkan',
@@ -72,6 +82,7 @@ class PencairanController extends Controller
     public function hapus($id)
     {
         $pencairan = Pencairan::find($id);
+        Storage::delete('public/asset/'.$pencairan->bukti);
 
         if (is_null( $pencairan)) {
             return response()->json([
@@ -106,11 +117,11 @@ class PencairanController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'id_pengajuan' => ['required'],
-            'jml_dana_keluar' => ['required'],
-            'tanggal_pencairan' => ['required', 'date'],
-            'keterangan' => ['required'],
-            'bukti' => ['required']
+            'id_pengajuan' => 'required',
+            'jml_dana_keluar' => 'required',
+            'tanggal_pencairan' =>  'required', 'date',
+            'keterangan' => 'required', 
+            'bukti' => 'mimes:pdf,docs'
         ]);
 
         if ($validator->fails()) {
@@ -121,13 +132,33 @@ class PencairanController extends Controller
         }
 
         try {
-            $pencairan->update($request->all());
+            if ($request->hasFile('bukti')){
+                //upload file
+                $file = $request->file('bukti');
+                $file->storeAs('public/asset/', $file->hashName());
+                  //delete old image
+                Storage::delete('public/asset/'.$pencairan->bukti);
+            
+            $pencairan->update([
+                'id_pengajuan' =>$request->id_pengajuan,
+                'jml_dana_keluar' =>$request->jml_dana_keluar,
+                'tanggal_pencairan' =>$request->tanggal_pencairan,
+                'keterangan' =>$request->keterangan, 
+                'bukti' =>$file->hashName()
+            ]);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data pencairan berhasil diupdate',
                 'data' => $pencairan
             ], Response::HTTP_OK);
-        } catch (QueryException $exception) {
+        }else{
+            $pencairan->update([
+                'id_pengajuan' =>$request->id_pengajuan,
+                'jml_dana_keluar' =>$request->jml_dana_keluar,
+                'tanggal_pencairan' =>$request->tanggal_pencairan,
+                'keterangan' =>$request->keterangan, 
+            ]);}}
+        catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
                 'message' => 'Data pencairan gagal diupdate',

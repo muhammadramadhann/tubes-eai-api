@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Pengajuan;
+use Illuminate\Support\Facades\Storage;
+
 
 class PengajuanController extends Controller
 {
@@ -24,24 +26,34 @@ class PengajuanController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_pegawai' => ['required'],
-            'divisi' => ['required', 'in:Human Resource,IT Team,Marketing,SCM,Finance'],
-            'proposal' => ['required'],
-            'tanggal_mengajukan' => ['required', 'date'],
-            'status_pengajuan' => ['required', 'in:Tertunda,Diterima,Diproses,Disetujui,Ditolak']
+            'nama_pegawai' => 'required',
+            'divisi' => 'required', 'in:Human Resource,IT Team,Marketing,SCM,Finance',
+            'proposal' => 'required|mimes:pdf,docs',
+            'tanggal_mengajukan' => 'required', 'date',
+            'status_pengajuan' => 'required', 'in:Tertunda,Diterima,Diproses,Disetujui,Ditolak'
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors());       
         }
+        //upload file
+        $file = $request->file('proposal');
+        $file->storeAs('public/asset/', $file->hashName());
 
         try {
-            $danas = Pengajuan::create($request->all());
+           $pengajuanDana = Pengajuan::create([
+            'nama_pegawai' => $request->nama_pegawai,
+            'divisi' => $request->divisi,
+            'proposal' => $file->hashName(),
+            'tanggal_mengajukan' => $request->tanggal_mengajukan,
+            'status_pengajuan' => $request->status_pengajuan
+        ]); 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data Pengajuan Dana Berhasil Ditambahkan',
-                'data' => $danas
+                'data' => $pengajuanDana
             ], Response::HTTP_CREATED);
+            
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
@@ -72,6 +84,7 @@ class PengajuanController extends Controller
     public function hapus($id)
     {
         $pengajuan  = Pengajuan::find($id);
+        Storage::delete('public/asset/'.$pengajuan->lampiran);
 
         if (is_null($pengajuan )) {
             return response()->json([
@@ -105,13 +118,12 @@ class PengajuanController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'nama_pegawai' => ['required'],
-            'divisi' => ['required', 'in:Human Resource,IT Team,Marketing,SCM,Finance'],
-            'proposal' => ['required'],
-            'tanggal_mengajukan' => ['required', 'date'],
-            'status_pengajuan' => ['required', 'in:Tertunda,Diterima,Diproses,Disetujui,Ditolak']
+            'nama_pegawai' => 'required',
+            'divisi' => 'required', 'in:Human Resource,IT Team,Marketing,SCM,Finance',
+            'proposal' => 'mimes:pdf,docs',
+            'tanggal_mengajukan' => 'required', 'date',
+            'status_pengajuan' => 'required', 'in:Tertunda,Diterima,Diproses,Disetujui,Ditolak'
         ]);
-
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'fail',
@@ -120,12 +132,33 @@ class PengajuanController extends Controller
         }
 
         try {
-            $pengajuan->update($request->all());
+            if ($request->hasFile('proposal')){
+            //upload file
+            $file = $request->file('proposal');
+            $file->storeAs('public/asset/', $file->hashName());
+              //delete old image
+              Storage::delete('public/asset/'.$pengajuan->lampiran);
+            
+            $pengajuan->update([
+                'nama_pegawai' => $request->nama_pegawai,
+                'divisi' => $request->divisi,
+                'proposal' => $file->hashName(),
+                'tanggal_mengajukan' => $request->tanggal_mengajukan,
+                'status_pengajuan' => $request->status_pengajuan
+            ]); 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data pengajuan berhasil diupdate',
                 'data' => $pengajuan
             ], Response::HTTP_OK);
+        }else{
+            $pengajuan->update([
+                'nama_pegawai' => $request->nama_pegawai,
+                'divisi' => $request->divisi,
+                'tanggal_mengajukan' => $request->tanggal_mengajukan,
+                'status_pengajuan' => $request->status_pengajuan
+            ]); 
+        }
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',

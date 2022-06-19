@@ -21,10 +21,9 @@ return new class extends Migration
             $table->enum('divisi',['Human Resource', 'IT Team', 'Marketing', 'SCM', 'Finance']);
             $table->string('hari_masuk');
             $table->string('hari_cuti');
-            $table->string('gaji_perhari');
+            $table->integer('gaji_perhari')->default(150000);
             $table->string('gaji_total');
             $table->date('tanggal_penggajian');
-            $table->string('bukti');
             $table->timestamps();
         });
     }

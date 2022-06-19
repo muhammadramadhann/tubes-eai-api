@@ -81,7 +81,7 @@ class ProductionReportController extends Controller
         }
 
         //check if image is not empty
-        if ($request->hasFile('lampiran')) {
+      if ($request->hasFile('lampiran')) {
 
             //upload image
             $lampiran = $request->file('image');

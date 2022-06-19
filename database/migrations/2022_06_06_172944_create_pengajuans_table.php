@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pegawai');
             $table->enum('divisi',['Human Resource', 'IT Team', 'Marketing', 'SCM', 'Finance']);
-            $table->string('proposal');
+            $table->string('proposal')->nullable();
             $table->date('tanggal_mengajukan');
             $table->enum('status_pengajuan', ['Tertunda', 'Diterima', 'Diporses', 'Disetujui', 'Ditolak']);
             $table->timestamps();

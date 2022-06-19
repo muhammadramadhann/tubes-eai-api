@@ -12,11 +12,11 @@ class PenggajianController extends Controller
 {
     public function index()
     {
-        $pencairan= Penggajian::all();
+        $penggajian= Penggajian::all();
         return response()->json([
             'status' => 'success',
             'message' => 'List Data Penggajian Karyawan',
-            'data' => $pencairan
+            'data' => $penggajian
         ], Response::HTTP_OK);
     }
 
@@ -29,9 +29,7 @@ class PenggajianController extends Controller
             'hari_masuk' => ['required'],
             'hari_cuti' => ['required'],
             'gaji_perhari' => ['required'],
-            'gaji_total' => ['required'],
-            'tanggal_penggajian' => ['required', 'date'],
-            'bukti' => ['required']
+            'tanggal_penggajian' => ['required', 'date']
         ]);
 
         if($validator->fails()){
@@ -39,12 +37,22 @@ class PenggajianController extends Controller
         }
 
         try {
-            $penggajian = Penggajian::create($request->all());
+            $penggajian = Penggajian::create([
+                'id_absensi' => $request->id_absensi,
+                'nama_karyawan' => $request->nama_karyawan,
+                'divisi' => $request->divisi,
+                'hari_masuk' => $request->hari_masuk,
+                'hari_cuti' => $request->hari_cuti,
+                'gaji_perhari' => $request->gaji_perhari,
+                'gaji_total' => ($request->hari_masuk * $request->gaji_perhari) - ($request->hari_cuti * $request->gaji_perhari),
+                'tanggal_penggajian' => $request->tanggal_penggajian,
+            ]);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data Penggajian Berhasil Ditambahkan',
                 'data' => $penggajian 
             ], Response::HTTP_CREATED);
+            
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
@@ -113,10 +121,8 @@ class PenggajianController extends Controller
             'divisi' => ['required', 'in:Human Resource,IT Team,Marketing,SCM,Finance'],
             'hari_masuk' => ['required'],
             'hari_cuti' => ['required'],
-            'gaji_perhari' => ['required'],
-            'gaji_total' => ['required'],
-            'tanggal_penggajian' => ['required', 'date'],
-            'bukti' => ['required']
+            'gaji_perhari' => ['require'],
+            'tanggal_penggajian' => ['required', 'date']
         ]);
 
         if ($validator->fails()) {
@@ -127,7 +133,15 @@ class PenggajianController extends Controller
         }
 
         try {
-            $penggajian->update($request->all());
+            $penggajian->update([ 
+            'id_absensi' => $request->id_absensi,
+            'nama_karyawan' => $request->nama_karyawan,
+            'divisi' => $request->divisi,
+            'hari_masuk' => $request->hari_masuk,
+            'hari_cuti' => $request->hari_cuti,
+            'gaji_perhari' => $request->gaji_perhari,
+            'gaji_total' => ($request->hari_masuk * $request->gaji_perhari) - ($request->hari_cuti * $request->gaji_perhari),
+            'tanggal_penggajian' => $request->tanggal_penggajian]);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data penggajian berhasil diupdate',
