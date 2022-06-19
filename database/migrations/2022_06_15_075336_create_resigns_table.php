@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('offworks', function (Blueprint $table) {
+        Schema::create('resigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_karyawan')->constrained('employees')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('kategori_cuti', ['Cuti tahunan', 'Sakit', 'Menstruasi', 'Melahirkan', 'Hamil', 'Lainnya']);
-            $table->date('tanggal_cuti');
-            $table->date('tanggal_kembali');
+            $table->enum('alasan_resign', ['Melanjutkan pendidikan', 'Perubahan karir', 'Permasalahan gaji', 'Keluarga', 'Lainnya']);
             $table->string('deskripsi', 500);
             $table->enum('status', ['Dalam proses', 'Disetujui', 'Ditolak'])->default('Dalam proses');
             $table->timestamps();
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offworks');
+        Schema::dropIfExists('resigns');
     }
 };

@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_plans', function (Blueprint $table) {
+        Schema::create('production_requests', function (Blueprint $table) {
             $table->id()->startingValue(rand());
-            $table->string('kegiatan_produksi');
-            $table->string('penanggung_jawab');
-            $table->integer('rencana_anggaran');
-            $table->string('jenis_barang');
-            $table->string('deskripsi');
-            $table->date('tanggal_produksi');
+            $table->string('nama_bahan_baku');
+            $table->string('jenis_bahan_baku');
+            $table->string('jumlah');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_plans');
+        Schema::dropIfExists('production_requests');
     }
 };

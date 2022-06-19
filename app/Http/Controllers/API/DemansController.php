@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Models\Offwork;
+use App\Models\demans;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class OffworkController extends Controller
+class DemansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +18,13 @@ class OffworkController extends Controller
      */
     public function index()
     {
-        $offworks = Offwork::all();
+        $demans = demans::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data absensi karyawan',
-            'data' => $offworks
+            'message' => 'List data permintaan barang',
+            'data' => $demans
         ], Response::HTTP_OK);
+        //
     }
 
     /**
@@ -46,11 +46,8 @@ class OffworkController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
-            'tanggal_cuti' => ['required', 'date'],
-            'tanggal_kembali' => ['required', 'date'],
-            'deskripsi' => ['required'],
+            'nama_produk' => ['required'],
+            'jumlah_produk' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -60,28 +57,21 @@ class OffworkController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $employee = Employee::find($request->id_karyawan);
-        if (is_null($employee)) {
-            return response()->json([
-                'status' => 'fail',
-                'message' => 'ID karyawan tidak ditemukan',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
         try {
-            $offwork = Offwork::create($request->all());
+            $demans = demans::create($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Pengajuan cuti berhasil diajukan dan akan ditinjau',
-                'data' => $offwork
+                'message' => 'Data permintaan barang berhasil ditambahkan',
+                'data' => $demans
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Pengajuan cuti gagal ditambahkan',
+                'message' => 'Data permintaan barang gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 
     /**
@@ -92,19 +82,21 @@ class OffworkController extends Controller
      */
     public function show($id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail pengajuan cuti',
-            'data' => $offwork
+            'message' => 'Detail data permintaan barang',
+            'data' => $demans
         ], Response::HTTP_OK);
+        //
     }
 
     /**
@@ -127,21 +119,18 @@ class OffworkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
-            'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
-            'tanggal_cuti' => ['required', 'date'],
-            'tanggal_kembali' => ['required', 'date'],
-            'deskripsi' => ['required'],
-            'status' => ['in:Dalam proses,Disetujui,Ditolak']
+            'nama_produk' => ['required'],
+            'jumlah_produk' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -151,28 +140,21 @@ class OffworkController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $employee = Employee::find($request->id_karyawan);
-        if (is_null($employee)) {
-            return response()->json([
-                'status' => 'fail',
-                'message' => 'ID karyawan tidak ditemukan',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
         try {
-            $offwork->update($request->all());
+            $demans->update($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data pengajuan cuti berhasil diupdate',
-                'data' => $offwork
-            ], Response::HTTP_CREATED);
+                'message' => 'Data permintaan barang berhasil diupdate',
+                'data' => $demans
+            ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti gagal diupdate',
+                'message' => 'Data permintaan barang gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 
     /**
@@ -183,26 +165,27 @@ class OffworkController extends Controller
      */
     public function destroy($id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $demans = demans::find($id);
+
+        if (is_null($demans)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permintaan barang tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
-
         try {
-            $offwork->delete();
+            $demans->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data pengajuan cuti berhasil dihapus',
+                'message' => 'Data permintaan barang berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti gagal dihapus',
+                'message' => 'Data permintaan barang gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+        //
     }
 }

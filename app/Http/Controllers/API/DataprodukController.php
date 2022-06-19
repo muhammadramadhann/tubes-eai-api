@@ -46,9 +46,8 @@ class DataprodukController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'ketersediaan_produk' => ['required'],
-            'status_pengiriman_kepada_scm' => ['required'],
-            'status_produk' => ['required'],
+            'nama_produk' => ['required'],
+            'ketersediaan_produk' => ['required', 'in:Tersedia,Tidak tersedia'],
         ]);
 
         if ($validator->fails()) {
@@ -126,9 +125,8 @@ class DataprodukController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'ketersediaan_produk' => ['required'],
-            'status_pengiriman_kepada_scm' => ['required'],
-            'status_produk' => ['required'],
+            'nama_produk' => ['required'],
+            'ketersediaan_produk' => ['required', 'in:Tersedia,Tidak tersedia'],
         ]);
 
         if ($validator->fails()) {

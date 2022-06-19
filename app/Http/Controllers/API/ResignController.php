@@ -4,13 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-use App\Models\Offwork;
+use App\Models\Resign;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class OffworkController extends Controller
+class ResignController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,11 @@ class OffworkController extends Controller
      */
     public function index()
     {
-        $offworks = Offwork::all();
+        $resigns = Resign::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data absensi karyawan',
-            'data' => $offworks
+            'message' => 'List data resign karyawan',
+            'data' => $resigns
         ], Response::HTTP_OK);
     }
 
@@ -47,9 +47,7 @@ class OffworkController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
-            'tanggal_cuti' => ['required', 'date'],
-            'tanggal_kembali' => ['required', 'date'],
+            'alasan_resign' => ['required', 'in:Melanjutkan pendidikan,Perubahan karir,Permasalahan gaji,Keluarga,Lainnya'],
             'deskripsi' => ['required'],
         ]);
 
@@ -69,16 +67,16 @@ class OffworkController extends Controller
         }
 
         try {
-            $offwork = Offwork::create($request->all());
+            $resign = Resign::create($request->all());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Pengajuan cuti berhasil diajukan dan akan ditinjau',
-                'data' => $offwork
+                'message' => 'Permohonan resign berhasil diajukan dan akan ditinjau',
+                'data' => $resign
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Pengajuan cuti gagal ditambahkan',
+                'message' => 'Permohonan resign gagal ditambahkan',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -92,18 +90,18 @@ class OffworkController extends Controller
      */
     public function show($id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $resign = Resign::find($id);
+        if (is_null($resign)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permohonan resign tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Detail pengajuan cuti',
-            'data' => $offwork
+            'message' => 'Detail permohonan resign cuti',
+            'data' => $resign
         ], Response::HTTP_OK);
     }
 
@@ -127,19 +125,17 @@ class OffworkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $resign = Resign::find($id);
+        if (is_null($resign)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permohonan resign tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
             'id_karyawan' => ['required'],
-            'kategori_cuti' => ['required', 'in:Cuti tahunan,Sakit,Menstruasi,Melahirkan,Lainnya'],
-            'tanggal_cuti' => ['required', 'date'],
-            'tanggal_kembali' => ['required', 'date'],
+            'alasan_resign' => ['required', 'in:Melanjutkan pendidikan,Perubahan karir,Permasalahan gaji,Keluarga,Lainnya'],
             'deskripsi' => ['required'],
             'status' => ['in:Dalam proses,Disetujui,Ditolak']
         ]);
@@ -160,16 +156,19 @@ class OffworkController extends Controller
         }
 
         try {
-            $offwork->update($request->all());
+            $resign->update($request->all());
+            if ($request->status == 'Disetujui') {
+                $employee->update(['status' => 'Resign']);
+            }
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data pengajuan cuti berhasil diupdate',
-                'data' => $offwork
+                'message' => 'Data permohonan resign berhasil diupdate',
+                'data' => $resign
             ], Response::HTTP_CREATED);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti gagal diupdate',
+                'message' => 'Data permohonan resign gagal diupdate',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -183,24 +182,24 @@ class OffworkController extends Controller
      */
     public function destroy($id)
     {
-        $offwork = Offwork::find($id);
-        if (is_null($offwork)) {
+        $resign = Resign::find($id);
+        if (is_null($resign)) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti tidak ditemukan',
+                'message' => 'Data permohonan resign tidak ditemukan',
             ], Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $offwork->delete();
+            $resign->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Data pengajuan cuti berhasil dihapus',
+                'message' => 'Data permohonan resign berhasil dihapus',
             ], Response::HTTP_OK);
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Data pengajuan cuti gagal dihapus',
+                'message' => 'Data permohonan resign gagal dihapus',
                 'error' => $exception->errorInfo
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
