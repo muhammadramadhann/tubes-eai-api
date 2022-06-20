@@ -86,37 +86,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('{id}/delete', [ResignView::class, 'destroy'])->name('resign.delete');
     });
 
-        // Finance| pengajuan
-        Route::prefix('/pengajuan')->group(function () {
-            Route::get('/', [PengajuanView::class, 'index'])->name('pengajuan');
-            Route::get('/create', [PengajuanView::class, 'create'])->name('pengajuan.create');
-            Route::post('/create', [PengajuanView::class, 'store'])->name('pengajuan.create');
-            Route::get('{id}/update', [PengajuanView::class, 'edit'])->name('pengajuan.edit');
-            Route::put('{id}/update', [PengajuanView::class, 'update'])->name('pengajuan.update');
-            Route::delete('{id}/delete', [PengajuanView::class, 'destroy'])->name('pengajuan.delete');
-        });
-
-        // Finance| pencairan
-        Route::prefix('/pencairan')->group(function () {
-            Route::get('/', [PencairanController::class, 'index'])->name('pencairan');
-            Route::get('/create', [PencairanController::class, 'create'])->name('pencairan.create');
-            Route::post('/create', [PencairanController::class, 'store'])->name('pencairan.create');
-            Route::get('{id}/update', [PencairanController::class, 'edit'])->name('pencairan.edit');
-            Route::put('{id}/update', [PencairanController::class, 'update'])->name('pencairan.update');
-            Route::delete('{id}/delete', [PencairanController::class, 'destroy'])->name('pencairan.delete');
-        });    
-        
-        // Finance| penggajian
-        Route::prefix('/penggajian')->group(function () {
-            Route::get('/', [PenggajianController::class, 'index'])->name('penggajian');
-            Route::get('/create', [PenggajianController::class, 'create'])->name('penggajian.create');
-            Route::post('/create', [PenggajianController::class, 'store'])->name('penggajian.create');
-            Route::get('{id}/update', [PenggajianController::class, 'edit'])->name('penggajian.edit');
-            Route::put('{id}/update', [PenggajianController::class, 'update'])->name('penggajian.update');
-            Route::delete('{id}/delete', [PenggajianController::class, 'destroy'])->name('penggajian.delete');
-        });
-                
-
     // Finance| pengajuan
     Route::prefix('/pengajuan')->group(function () {
         Route::get('/', [PengajuanView::class, 'index'])->name('pengajuan');
@@ -157,35 +126,35 @@ Route::middleware('auth')->group(function () {
         Route::delete('{id}/delete', [MaterialController::class, 'destroy'])->name('material.delete');
     });
 
-            // IT | Production report
-        Route::prefix('/productionreport')->group(function () {
-            Route::get('/', [ProductionReportController::class, 'index'])->name('productionreport');
-            Route::get('/create', [ProductionReportController::class, 'create'])->name('productionreport.create');
-            Route::post('/create', [ProductionReportController::class, 'store'])->name('productionreport.create');
-            Route::get('{id}/update', [ProductionReportController::class, 'edit'])->name('productionreport.edit');
-            Route::put('{id}/update', [ProductionReportController::class, 'update'])->name('productionreport.update');
-            Route::delete('{id}/delete', [ProductionReportController::class, 'destroy'])->name('productionreport.delete');
-        }); 
+    // IT | Production report
+    Route::prefix('/productionreport')->group(function () {
+        Route::get('/', [ProductionReportController::class, 'index'])->name('productionreport');
+        Route::get('/create', [ProductionReportController::class, 'create'])->name('productionreport.create');
+        Route::post('/create', [ProductionReportController::class, 'store'])->name('productionreport.create');
+        Route::get('{id}/update', [ProductionReportController::class, 'edit'])->name('productionreport.edit');
+        Route::put('{id}/update', [ProductionReportController::class, 'update'])->name('productionreport.update');
+        Route::delete('{id}/delete', [ProductionReportController::class, 'destroy'])->name('productionreport.delete');
+    }); 
 
-         // IT | Production request
-         Route::prefix('/productionrequest')->group(function () {
-            Route::get('/', [ProductionRequestController::class, 'index'])->name('productionrequest');
-            Route::get('/create', [ProductionRequestController::class, 'create'])->name('productionrequest.create');
-            Route::post('/create', [ProductionRequestController::class, 'store'])->name('productionrequest.create');
-            Route::get('{id}/update', [ProductionRequestController::class, 'edit'])->name('productionrequest.edit');
-            Route::put('{id}/update', [ProductionRequestController ::class, 'update'])->name('productionrequest.update');
-            Route::delete('{id}/delete', [ProductionRequestController::class, 'destroy'])->name('productionrequest.delete');
-        });
-        
-         // Marketing| permintaan barang
-         Route::prefix('/demands')->group(function () {
-            Route::get('/', [DemandsController::class, 'index'])->name('demands');
-            Route::get('/create', [DemandsController::class, 'create'])->name('demands.create');
-            Route::post('/create', [DemandsController::class, 'store'])->name('demands.create');
-            Route::get('{id}/update', [DemandsController::class, 'edit'])->name('demands.edit');
-            Route::put('{id}/update', [DemandsController::class, 'update'])->name('demands.update');
-            Route::delete('{id}/delete', [DemandsController::class, 'destroy'])->name('demands.delete');
-        });  
+    // IT | Production request
+    Route::prefix('/productionrequest')->group(function () {
+        Route::get('/', [ProductionRequestController::class, 'index'])->name('productionrequest');
+        Route::get('/create', [ProductionRequestController::class, 'create'])->name('productionrequest.create');
+        Route::post('/create', [ProductionRequestController::class, 'store'])->name('productionrequest.create');
+        Route::get('{id}/update', [ProductionRequestController::class, 'edit'])->name('productionrequest.edit');
+        Route::put('{id}/update', [ProductionRequestController ::class, 'update'])->name('productionrequest.update');
+        Route::delete('{id}/delete', [ProductionRequestController::class, 'destroy'])->name('productionrequest.delete');
+    });
+
+    // Marketing| permintaan barang
+    Route::prefix('/demands')->group(function () {
+        Route::get('/', [DemandsController::class, 'index'])->name('demands');
+        Route::get('/create', [DemandsController::class, 'create'])->name('demands.create');
+        Route::post('/create', [DemandsController::class, 'store'])->name('demands.create');
+        Route::get('{id}/update', [DemandsController::class, 'edit'])->name('demands.edit');
+        Route::put('{id}/update', [DemandsController::class, 'update'])->name('demands.update');
+        Route::delete('{id}/delete', [DemandsController::class, 'destroy'])->name('demands.delete');
+    }); 
 
     // logout
     Route::get('/logout', LogoutController::class)->name('logout');

@@ -25,12 +25,12 @@
                 </div>
 
                 {{-- Finance --}}
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFinance" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link {{ Request::is('penggajian', 'penggajian/*', 'pengajuan', 'pengajuan/*', 'pencairan', 'pencairan/*', 'pengajuan-cuti', 'pengajuan-cuti/*') ? 'active' : 'collapsed' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFinance" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon" style="color:#AE431E;"><i class="fas fa-book"></i></div>
                     <div style="color:#AE431E;">Finance</div>
                     <div class="sb-sidenav-collapse-arrow" style="color:#AE431E;"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseFinance" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('penggajian', 'penggajian/*', 'pengajuan', 'pengajuan/*', 'pencairan', 'pencairan/*', 'pengajuan-cuti', 'pengajuan-cuti/*') ? 'show' : '' }}" id="collapseFinance" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('penggajian', 'penggajian/*') ? 'active' : '' }}" href="/penggajian">Penggajian</a>
                         <a class="nav-link {{ Request::is('pengajuan', 'pengajuan/*') ? 'active' : '' }}" href="/pengajuan">Pengajuan</a>
@@ -46,7 +46,8 @@
                 </a>
                 <div class="collapse" id="collapseMarketing" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">N/A</a>
+                        <a class="nav-link" href="">Permintaan Barang</a>
+                        <a class="nav-link" href="">Laporan Penjualan</a>
                     </nav>
                 </div>
                 
@@ -56,7 +57,7 @@
                     <div style="color:#AE431E;">IT (Produksi)</div>
                     <div class="sb-sidenav-collapse-arrow" style="color:#AE431E;"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseIt" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('productionreport', 'productionreport/*', 'productionrequest', 'productionrequest/*') ? 'show' : '' }}" id="collapseIt" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('productionreport', 'productionreport/*') ? 'active' : '' }}" href="/productionreport">Laporan Produksi</a>
                         <a class="nav-link {{ Request::is('productionrequest', 'productionrequest/*') ? 'active' : '' }}" href="/productionrequest">Perencanaan Produksi</a>
