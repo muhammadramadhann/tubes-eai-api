@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+
 
 class MaterialController extends Controller
 {
@@ -50,15 +51,6 @@ class MaterialController extends Controller
         ]);
 
         $material = material::create($request->all());
-        // $material = material::create([
-        //     'nama_bahan_baku' => $request->nama_bahan_baku,
-        //     'jenis_bahan_baku' => $request->jenis_bahan_baku,
-        //     'jumlah_bahan_baku' => $request->jumlah_bahan_baku,
-        //     'total_biaya_bahan_baku' => $request->total_biaya_bahan_baku,
-        //     'tanggal_pembelian' => $request->tanggal_pembelian,
-        //     'status_pembayaran' => $request->status_pembayaran,
-        //     'status_bahan_baku' => $request->status_bahan_baku,
-        // ]);
 
         if ($material) {
             return Redirect::route('material')->with('success', 'Data material berhasil ditambahkan');
@@ -110,15 +102,6 @@ class MaterialController extends Controller
 
         $material = material::where('id', $id)->first();
         $update = $material->update($request->all());
-        // $update = $material->update([
-        //     'nama_bahan_baku' => $request->nama_bahan_baku,
-        //     'jenis_bahan_baku' => $request->jenis_bahan_baku,
-        //     'jumlah_bahan_baku' => $request->jumlah_bahan_baku,
-        //     'total_biaya_bahan_baku' => $request->total_biaya_bahan_baku,
-        //     'tanggal_pembelian' => $request->tanggal_pembelian,
-        //     'status_pembayaran' => $request->status_pembayaran,
-        //     'status_bahan_baku' => $request->status_bahan_baku,
-        // ]);
         if ($update) {
             return Redirect::route('material')->with('success', 'Data material berhasil diubah');
         }
