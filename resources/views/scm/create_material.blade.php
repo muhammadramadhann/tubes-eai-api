@@ -14,7 +14,7 @@
     </div>
     <div class="row mb-5">
         <div class="col-lg-7 col-12">
-            {{-- <form action="{{ Route('material.create') }}" method="POST" enctype="multipart/form-data"> --}}
+            <form action="{{ Route('material.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <section id="data-material" class="mb-4">
                     <h5 class="fw-bold">Data Material</h5>
@@ -29,26 +29,25 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="jenis" class="form-label">Jenis Material</label>
-                                                    {{-- old nya blm buat --}}
-                            <select class="form-select" id="jenis" name="jenis" aria-label="Default select example" value="{{ old('jenis') }}">
-                                <option selected disabled>-- Pilih jenis material --</option>
-                                <option value="Software">Software</option>
-                                <option value="Hardware">Hardware</option>
-                            </select>
-                            @error('jenis')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+
+                    {{-- jenis material --}}
+                <div class="row mb-3">
+                    <div class="col-md-7 col-12 mb-md-0 mb-3">
+                        <label for="jenis" class="form-label">Jenis Material</label>
+                        <input type="text" class="form-control" id="jenis" name="jenis" value="{{ old('jenis') }}" placeholder="Software">
+                        @error('jenis')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     </div>
 
-                    {{-- belum beres dan blm bener --}}
+                    {{-- jumlah material --}}
+                    <div class="row mb-3">
                     <div class="col-md-5 col-12">
                         <label for="jumlah_material" class="form-label">Jumlah Material</label>
+                        {{-- oldnya blm buat --}}
                         <input type="text" class="form-control" id="jumlah_material" name="jumlah_material" value="{{ old('jumlah_material') }}" placeholder="10">
                         @error('jumlah_material')
                             <div class="text-danger mt-2">
@@ -59,8 +58,10 @@
                         </div>
 
                         {{-- total biaya --}}
+                        <div class="row mb-3">
                         <div class="col-md-5 col-12">
                             <label for="total_biaya" class="form-label">Total Biaya Material</label>
+                            {{-- old nya blm buat --}}
                             <input type="text" class="form-control" id="total_biaya" name="total_biaya" value="{{ old('total_biaya') }}" placeholder="1500000">
                             @error('total_biaya')
                                 <div class="text-danger mt-2">
@@ -68,6 +69,7 @@
                                 </div>
                             @enderror
                         </div>
+                    </div>
 
 {{-- TANGGAL PEMBELIAN MATERIAL --}}
                     <div class="row mb-3">

@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\OffworkViewController as OffworkView;
 use App\Http\Controllers\Web\PencairanController;
 use App\Http\Controllers\Web\PenggajianController;
 use App\Http\Controllers\Web\ResignViewController as ResignView;
+use App\Http\Controllers\Web\MaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,36 +83,46 @@ Route::middleware('auth')->group(function () {
         Route::delete('{id}/delete', [ResignView::class, 'destroy'])->name('resign.delete');
     });
 
-        // Finance| pengajuan
-        Route::prefix('/pengajuan')->group(function () {
-            Route::get('/', [PengajuanView::class, 'index'])->name('pengajuan');
-            Route::get('/create', [PengajuanView::class, 'create'])->name('pengajuan.create');
-            Route::post('/create', [PengajuanView::class, 'store'])->name('pengajuan.create');
-            Route::get('{id}/update', [PengajuanView::class, 'edit'])->name('pengajuan.edit');
-            Route::put('{id}/update', [PengajuanView::class, 'update'])->name('pengajuan.update');
-            Route::delete('{id}/delete', [PengajuanView::class, 'destroy'])->name('pengajuan.delete');
-        });
+    // Finance| pengajuan
+    Route::prefix('/pengajuan')->group(function () {
+        Route::get('/', [PengajuanView::class, 'index'])->name('pengajuan');
+        Route::get('/create', [PengajuanView::class, 'create'])->name('pengajuan.create');
+        Route::post('/create', [PengajuanView::class, 'store'])->name('pengajuan.create');
+        Route::get('{id}/update', [PengajuanView::class, 'edit'])->name('pengajuan.edit');
+        Route::put('{id}/update', [PengajuanView::class, 'update'])->name('pengajuan.update');
+        Route::delete('{id}/delete', [PengajuanView::class, 'destroy'])->name('pengajuan.delete');
+    });
 
-        // Finance| pencairan
-        Route::prefix('/pencairan')->group(function () {
-            Route::get('/', [PencairanController::class, 'index'])->name('pencairan');
-            Route::get('/create', [PencairanController::class, 'create'])->name('pencairan.create');
-            Route::post('/create', [PencairanController::class, 'store'])->name('pencairan.create');
-            Route::get('{id}/update', [PencairanController::class, 'edit'])->name('pencairan.edit');
-            Route::put('{id}/update', [PencairanController::class, 'update'])->name('pencairan.update');
-            Route::delete('{id}/delete', [PencairanController::class, 'destroy'])->name('pencairan.delete');
-        });    
-        
-        // Finance| penggajian
-        Route::prefix('/penggajian')->group(function () {
-            Route::get('/', [PenggajianController::class, 'index'])->name('penggajian');
-            Route::get('/create', [PenggajianController::class, 'create'])->name('penggajian.create');
-            Route::post('/create', [PenggajianController::class, 'store'])->name('penggajian.create');
-            Route::get('{id}/update', [PenggajianController::class, 'edit'])->name('penggajian.edit');
-            Route::put('{id}/update', [PenggajianController::class, 'update'])->name('penggajian.update');
-            Route::delete('{id}/delete', [PenggajianController::class, 'destroy'])->name('penggajian.delete');
-        });  
-        
+    // Finance| pencairan
+    Route::prefix('/pencairan')->group(function () {
+        Route::get('/', [PencairanController::class, 'index'])->name('pencairan');
+        Route::get('/create', [PencairanController::class, 'create'])->name('pencairan.create');
+        Route::post('/create', [PencairanController::class, 'store'])->name('pencairan.create');
+        Route::get('{id}/update', [PencairanController::class, 'edit'])->name('pencairan.edit');
+        Route::put('{id}/update', [PencairanController::class, 'update'])->name('pencairan.update');
+        Route::delete('{id}/delete', [PencairanController::class, 'destroy'])->name('pencairan.delete');
+    });
+
+    // Finance| penggajian
+    Route::prefix('/penggajian')->group(function () {
+        Route::get('/', [PenggajianController::class, 'index'])->name('penggajian');
+        Route::get('/create', [PenggajianController::class, 'create'])->name('penggajian.create');
+        Route::post('/create', [PenggajianController::class, 'store'])->name('penggajian.create');
+        Route::get('{id}/update', [PenggajianController::class, 'edit'])->name('penggajian.edit');
+        Route::put('{id}/update', [PenggajianController::class, 'update'])->name('penggajian.update');
+        Route::delete('{id}/delete', [PenggajianController::class, 'destroy'])->name('penggajian.delete');
+    });
+
+    // SCM | material
+    Route::prefix('/material')->group(function () {
+        Route::get('/', [MaterialController::class, 'index'])->name('material');
+        Route::get('/create', [MaterialController::class, 'create'])->name('material.create');
+        Route::post('/create', [MaterialController::class, 'store'])->name('material.create');
+        Route::get('{id}/update', [MaterialController::class, 'edit'])->name('material.edit');
+        Route::put('{id}/update', [MaterialController::class, 'update'])->name('material.update');
+        Route::delete('{id}/delete', [MaterialController::class, 'destroy'])->name('material.delete');
+    });
+
     // logout
     Route::get('/logout', LogoutController::class)->name('logout');
 });
