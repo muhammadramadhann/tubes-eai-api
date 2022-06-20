@@ -110,8 +110,8 @@ Route::middleware('auth')->group(function () {
             Route::get('{id}/update', [PenggajianController::class, 'edit'])->name('penggajian.edit');
             Route::put('{id}/update', [PenggajianController::class, 'update'])->name('penggajian.update');
             Route::delete('{id}/delete', [PenggajianController::class, 'destroy'])->name('penggajian.delete');
-        });  
-        
+        });
+                
     // logout
     Route::get('/logout', LogoutController::class)->name('logout');
 });
