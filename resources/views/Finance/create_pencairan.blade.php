@@ -50,7 +50,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{ old('keterangan') }}" placeholder="Keterangan pengeluaran dana">
+                        <textarea style="height: 100px" class="form-control" id="keterangan" name="keterangan" placeholder="Isi keterangan ..."></textarea>
                         @error('keterangan')
                             <div class="text-danger mt-2">
                                 {{ $message }}
