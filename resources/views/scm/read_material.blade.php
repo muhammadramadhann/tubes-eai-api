@@ -53,14 +53,14 @@
                     {{-- INI BELUM BENER YA --}}
                     @foreach ($materials as $material)
                         <tr>
-                            <td>{{ $materials->id }}</td>
-                            <td>{{ $materials->nama_bahan_baku }}</td>
-                            <td>{{ $materials->jenis_bahan_baku }}</td>
-                            <td>{{ $materials->jumlah_bahan_baku }}</td>
-                            <td>{{ $materials->total_biaya_bahan_baku }}</td>
-                            <td>{{ $materials->tanggal_pembelian}}</td>
-                            <td>{{ $materials->status_pembayaran }}</td>
-                            <td>{{ $materials->status_bahan_baku }}</td>
+                            <td>{{ $material->id }}</td>
+                            <td>{{ $material->nama_bahan_baku }}</td>
+                            <td>{{ $material->jenis_bahan_baku }}</td>
+                            <td>{{ $material->jumlah_bahan_baku }}</td>
+                            <td>{{ $material->total_biaya_bahan_baku }}</td>
+                            <td>{{ Carbon\Carbon::createFromDate($material->tanggal_pembelian)->translatedFormat('j F Y') }}</td>
+                            <td>{{ $material->status_pembayaran }}</td>
+                            <td>{{ $material->status_bahan_baku }}</td>
                             <td>
                                 {{-- route masi blm buat --}}
                                 <a href="{{ Route('material.edit', $material->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>

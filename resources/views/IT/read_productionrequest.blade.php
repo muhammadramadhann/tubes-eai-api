@@ -1,16 +1,16 @@
 @extends('layouts.base')
 
-@section('title', 'Marketing | Data Permintaan Barang')
+@section('title', 'IT Production | Data Production Request')
 
 @section('content')
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="/"><small>Dashboard</small></a></li>
-        <li class="breadcrumb-item active"><small>Permintaan Barang</small></li>
+        <li class="breadcrumb-item active"><small>IT Production</small></li>
     </ol>
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-3">
-        <h4 class="fw-bold mb-md-0 mb-2">Data Permintaan Barang</h4>
-        <a href="{{ Route('demands.create') }}" class="btn btn-primary">Tambah Data</a>
+        <h4 class="fw-bold mb-md-0 mb-2">Data Production Request</h4>
+        <a href="{{ Route('productionrequest.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -39,22 +39,22 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nama Produk</th>
-                        <th>Jumlah Produk</th>
-                        <th>Deskripsi</th>
+                        <th>Nama Bahan Baku</th>
+                        <th>Jenis Bahan Baku</th>
+                        <th>Jumlah</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($demands as $demands)
+                    @foreach ($productionreq as $prod)
                         <tr>
-                            <td>{{ $demands->id}}</td>
-                            <td>{{ $demands->nama_produk}}</td>
-                            <td>{{ $demands->jumlah_produk}}</td>
-                            <td>{{ $demands->deskripsi}}</td>
+                            <td>{{ $prod->id}}</td>
+                            <td>{{ $prod->nama_bahan_baku}}</td>
+                            <td>{{ $prod->jenis_bahan_baku}}</td>
+                            <td>{{ $prod->jumlah}}</td>
                             <td>
-                                <a href="{{ Route('demands.edit', $demands->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
+                                <a href="{{ Route('productionrequest.edit', $prod->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
                                 <span class="text-muted d-lg-inline d-none">|</span>
-                                <form action="{{ Route('demands.delete', $demands->id) }}" method="POST" class="d-inline">
+                                <form action="{{ Route('productionrequest.delete', $prod->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <button type="submit" class="btn btn-danger btn-sm text-decoration-none">Hapus</button>

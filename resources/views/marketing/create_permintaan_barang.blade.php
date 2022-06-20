@@ -5,7 +5,7 @@
 @section('content')
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="/"><small>Dashboard</small></a></li>
-        <li class="breadcrumb-item active"><a href="/demans"><small>Permintaan Barang</small></a></li>
+        <li class="breadcrumb-item active"><a href="/demands"><small>Permintaan Barang</small></a></li>
         <li class="breadcrumb-item active"><small>Tambah Data Permintaan Barang</small></li>
     </ol>
     <hr class="mb-4">
@@ -14,7 +14,7 @@
     </div>
     <div class="row mb-5">
         <div class="col-lg-7 col-12">
-            <form action="{{ Route('demans.create') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ Route('demands.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <section id="personal-data" class="mb-4">
                     <h5 class="fw-bold">Data Permintaan Barang</h5>
@@ -28,24 +28,6 @@
                             </div>
                         @enderror
                     </div>
-                    <!-- <div class="row mb-3">
-                        <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="divisi" class="form-label">Divisi</label>
-                            <select class="form-select" id="divisi" name="divisi" aria-label="Default select example" value="{{ old('divisi') }}">
-                                <option selected disabled>-- Pilih divisi --</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Finance">Finance</option>
-                                <option value="IT Team">IT Team</option>
-                                <option value="SCM">SCM</option>
-                                <option value="HC">HC</option>
-                            </select>
-                            @error('divisi')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div> -->
                         <div class="row mb-3">
                         <div class="col-md-7 col-12 mb-md-0 mb-3">
                             <label for="jumlah_produk" class="form-label">Jumlah Produk</label>
@@ -57,18 +39,6 @@
                             @enderror
                         </div>
                         </div>
-                    <!-- <div class="row mb-3">
-                        <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="tanggal_mengajukan" class="form-label">Tanggal Mengajukan</label>
-                            <input type="date" class="form-control" id="tanggal_mengajukan" name="tanggal_mengajukan" placeholder="2022-10-02">
-                            @error('tanggal_mengajukan')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div> -->
-
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-7 col-12 mb-md-0 mb-3">
