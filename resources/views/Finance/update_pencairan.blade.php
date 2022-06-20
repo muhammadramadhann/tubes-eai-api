@@ -41,7 +41,7 @@
                     <div class="row mb-3">
                         <div class="col-md-7 col-12 mb-md-0 mb-3">
                             <label for="tanggal_pencairan" class="form-label">Tanggal Pencairan</label>
-                            <input type="date" class="form-control" id="tanggal_pencairan" name="tanggal_pencairan"  value="{{ $pencairan->tanggal_pengajuan}}" placeholder="2022-10-02">
+                            <input type="date" class="form-control" id="tanggal_pencairan" name="tanggal_pencairan"  value="{{ $pencairan->tanggal_pencairan}}" placeholder="2022-10-02">
                             @error('tanggal_pencairan')
                                 <div class="text-danger mt-2">
                                     {{ $message }}
@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan"  value="{{ $pencairan->keterangan}}" placeholder="Keterangan pengeluaran dana">
+                        <textarea style="height: 100px" class="form-control" id="keterangan" name="keterangan" placeholder="Isi keterangan ...">{{ $pencairan->keterangan}}</textarea>
                         @error('keterangan')
                             <div class="text-danger mt-2">
                                 {{ $message }}

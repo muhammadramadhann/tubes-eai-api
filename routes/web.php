@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\PencairanController;
 use App\Http\Controllers\Web\PenggajianController;
 use App\Http\Controllers\Web\ResignViewController as ResignView;
 use App\Http\Controllers\Web\MaterialController;
+use App\Http\Controllers\Web\ProductionReportController;
 use App\Http\Controllers\Web\ProductionRequestController;
 use Illuminate\Support\Facades\Route;
 
