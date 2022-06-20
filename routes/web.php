@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\MaterialController;
 use App\Http\Controllers\Web\ProductionReportController;
 use App\Http\Controllers\Web\ProductionRequestController;
 use App\Http\Controllers\Web\DemandsController;
+use App\Http\Controllers\Web\DataprodukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,6 +127,16 @@ Route::middleware('auth')->group(function () {
         Route::delete('{id}/delete', [MaterialController::class, 'destroy'])->name('material.delete');
     });
 
+    // SCM | Data produk
+    Route::prefix('/dataproduk')->group(function () {
+        Route::get('/', [DataprodukController::class, 'index'])->name('dataproduk');
+        Route::get('/create', [DataprodukController::class, 'create'])->name('dataproduk.create');
+        Route::post('/create', [DataprodukController::class, 'store'])->name('dataproduk.create');
+        Route::get('{id}/update', [DataprodukController::class, 'edit'])->name('dataproduk.edit');
+        Route::put('{id}/update', [DataprodukController::class, 'update'])->name('dataproduk.update');
+        Route::delete('{id}/delete', [DataprodukController::class, 'destroy'])->name('dataproduk.delete');
+    });
+
     // IT | Production report
     Route::prefix('/productionreport')->group(function () {
         Route::get('/', [ProductionReportController::class, 'index'])->name('productionreport');
@@ -134,7 +145,7 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/update', [ProductionReportController::class, 'edit'])->name('productionreport.edit');
         Route::put('{id}/update', [ProductionReportController::class, 'update'])->name('productionreport.update');
         Route::delete('{id}/delete', [ProductionReportController::class, 'destroy'])->name('productionreport.delete');
-    }); 
+    });
 
     // IT | Production request
     Route::prefix('/productionrequest')->group(function () {
@@ -142,7 +153,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [ProductionRequestController::class, 'create'])->name('productionrequest.create');
         Route::post('/create', [ProductionRequestController::class, 'store'])->name('productionrequest.create');
         Route::get('{id}/update', [ProductionRequestController::class, 'edit'])->name('productionrequest.edit');
-        Route::put('{id}/update', [ProductionRequestController ::class, 'update'])->name('productionrequest.update');
+        Route::put('{id}/update', [ProductionRequestController::class, 'update'])->name('productionrequest.update');
         Route::delete('{id}/delete', [ProductionRequestController::class, 'destroy'])->name('productionrequest.delete');
     });
 
@@ -154,7 +165,7 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/update', [DemandsController::class, 'edit'])->name('demands.edit');
         Route::put('{id}/update', [DemandsController::class, 'update'])->name('demands.update');
         Route::delete('{id}/delete', [DemandsController::class, 'destroy'])->name('demands.delete');
-    }); 
+    });
 
     // logout
     Route::get('/logout', LogoutController::class)->name('logout');

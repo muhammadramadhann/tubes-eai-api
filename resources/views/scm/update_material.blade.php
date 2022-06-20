@@ -92,7 +92,7 @@
                         <div class="row mb-3">
                             <div class="col-md-7 col-12 mb-md-0 mb-3">
                                 <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
-                                <input type="text" class="form-control" id="status_pembayaran" name="status_pembayaran" value="{{$material->status_pembayaran}}" value="Belum Dibayar" readonly>
+                                <input type="text" class="form-control" id="status_pembayaran" name="status_pembayaran" value="{{$material->status_pembayaran}}" placeholder="Belum Dibayar">
                                 @error('status_pembayaran')
                                     <div class="text-danger mt-2">
                                         {{ $message }}
@@ -105,7 +105,7 @@
                         <div class="row mb-3">
                             <div class="col-md-7 col-12 mb-md-0 mb-3">
                                 <label for="status_material" class="form-label">Status Material</label>
-                                <input type="text" class="form-control" id="status_material" name="status_material" value="{{$material->status_bahan_baku}}" value="Tidak Sesuai Pesanan" readonly>
+                                <input type="text" class="form-control" id="status_material" name="status_material" value="{{$material->status_bahan_baku}}" placeholder="Tidak Sesuai Pesanan">
                                 @error('status_material')
                                     <div class="text-danger mt-2">
                                         {{ $message }}
