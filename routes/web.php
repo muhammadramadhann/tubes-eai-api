@@ -16,6 +16,7 @@ use App\Http\Controllers\Web\ProductionReportController;
 use App\Http\Controllers\Web\ProductionRequestController;
 use App\Http\Controllers\Web\DemandsController;
 use App\Http\Controllers\Web\DataprodukController;
+use App\Http\Controllers\Web\SalesReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -165,6 +166,16 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/update', [DemandsController::class, 'edit'])->name('demands.edit');
         Route::put('{id}/update', [DemandsController::class, 'update'])->name('demands.update');
         Route::delete('{id}/delete', [DemandsController::class, 'destroy'])->name('demands.delete');
+    });
+
+    // Marketing| laporan penjualan
+    Route::prefix('/sales_report')->group(function () {
+        Route::get('/', [SalesReportController::class, 'index'])->name('sales_report');
+        Route::get('/create', [SalesReportController::class, 'create'])->name('sales_report.create');
+        Route::post('/create', [SalesReportController::class, 'store'])->name('sales_report.create');
+        Route::get('{id}/update', [SalesReportController::class, 'edit'])->name('sales_report.edit');
+        Route::put('{id}/update', [SalesReportController::class, 'update'])->name('sales_report.update');
+        Route::delete('{id}/delete', [SalesReportController::class, 'destroy'])->name('sales_report.delete');
     });
 
     // logout
