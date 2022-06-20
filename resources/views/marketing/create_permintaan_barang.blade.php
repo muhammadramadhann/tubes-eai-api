@@ -28,28 +28,23 @@
                             </div>
                         @enderror
                     </div>
-                        <div class="row mb-3">
-                        <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="jumlah_produk" class="form-label">Jumlah Produk</label>
-                            <input type="integer" class="form-control" id="jumlah_produk" name="jumlah_produk">
-                            @error('jumlah_produk')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="jumlah_produk" class="form-label">Jumlah Produk</label>
+                        <input type="number" class="form-control" id="jumlah_produk" name="jumlah_produk" value="{{ old('jumlah_produk') }}" placeholder="Jumlah Produk">
+                        @error('jumlah_produk')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-7 col-12 mb-md-0 mb-3">
-                            <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" id="deskripsi" name="deskripsi">
-                            @error('deskripsi')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Tambahkan Deskripsi (Opsional)">
+                        @error('deskripsi')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </section>
                 <section id="button" class="d-lg-flex d-block">

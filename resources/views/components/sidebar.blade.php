@@ -39,14 +39,14 @@
                 </div>
 
                 {{-- Marketing --}}
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMarketing" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link {{ Request::is('demands', 'demands/*') ? 'active' : 'collapsed' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMarketing" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon" style="color:#AE431E;"><i class="fas fa-search-dollar"></i></div>
                     <div style="color:#AE431E;">Marketing</div>
                     <div class="sb-sidenav-collapse-arrow" style="color:#AE431E;"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseMarketing" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('demands', 'demands/*') ? 'show' : '' }}" id="collapseMarketing" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">Permintaan Barang</a>
+                        <a class="nav-link {{ Request::is('demands', 'demands/*') ? 'active' : '' }}" href="/demands">Permintaan Barang</a>
                         <a class="nav-link" href="">Laporan Penjualan</a>
                     </nav>
                 </div>
