@@ -46,7 +46,8 @@
                 </a>
                 <div class="collapse" id="collapseMarketing" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">N/A</a>
+                        <a class="nav-link" href="">Permintaan Barang</a>
+                        <a class="nav-link" href="">Laporan Penjualan</a>
                     </nav>
                 </div>
                 
@@ -56,7 +57,7 @@
                     <div style="color:#AE431E;">IT (Produksi)</div>
                     <div class="sb-sidenav-collapse-arrow" style="color:#AE431E;"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseIt" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('productionreport', 'productionreport/*', 'productionrequest', 'productionrequest/*') ? 'show' : '' }}" id="collapseIt" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('productionreport', 'productionreport/*') ? 'active' : '' }}" href="/productionreport">Laporan Produksi</a>
                         <a class="nav-link {{ Request::is('productionrequest', 'productionrequest/*') ? 'active' : '' }}" href="/productionrequest">Perencanaan Produksi</a>
