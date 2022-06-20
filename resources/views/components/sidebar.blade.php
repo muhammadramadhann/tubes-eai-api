@@ -65,14 +65,15 @@
                 </div>
                 
                 {{-- SCM --}}
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseScm" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link {{ Request::is('material', 'material/*', 'dataproduk', 'dataproduk/*') ? 'active' : 'collapsed' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseScm" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon" style="color:#AE431E;"><i class="fas fa-warehouse"></i></div>
                     <div style="color:#AE431E;">SCM</div>
                     <div class="sb-sidenav-collapse-arrow" style="color:#AE431E;"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseScm" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{ Request::is('material', 'material/*', 'dataproduk', 'dataproduk/*') ? 'show' : '' }}" id="collapseScm" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">Material</a>
+                        <a class="nav-link {{ Request::is('material', 'material/*') ? 'active' : '' }}" href="/material">Material</a>
+                        <a class="nav-link {{ Request::is('dataproduk', 'dataproduk/*') ? 'active' : '' }}" href="/dataproduk">Data Produk</a>
                     </nav>
                 </div>
             </div>

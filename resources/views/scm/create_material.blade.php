@@ -13,16 +13,16 @@
         <h4 class="fw-bold mb-md-0 mb-2">Tambah Data Material</h4>
     </div>
     <div class="row mb-5">
-        <div class="col-lg-7 col-12">
+        <div class="col-lg-6 col-12">
             <form action="{{ Route('material.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <section id="data-material" class="mb-4">
                     <h5 class="fw-bold">Data Material</h5>
                     <p class="text-muted"><small>Isi seluruh data material</small></p>
                     <div class="mb-3">
-                        <label for="nama_material" class="form-label">Nama Material</label>
-                        <input type="text" class="form-control" id="nama_material" name="nama_material" value="{{ old('nama_material') }}" placeholder="Kerangka GPS">
-                        @error('nama_material')
+                        <label for="nama_bahan_baku" class="form-label">Nama Material</label>
+                        <input type="text" class="form-control" id="nama_bahan_baku" name="nama_bahan_baku" value="{{ old('nama_bahan_baku') }}" placeholder="Kerangka GPS">
+                        @error('nama_bahan_baku')
                             <div class="text-danger mt-2">
                                 {{ $message }}
                             </div>
@@ -30,10 +30,10 @@
                     </div>
 
                     {{-- jenis material --}}
-                <div class="mb-3">
-                        <label for="jenis" class="form-label">Jenis Material</label>
-                        <input type="text" class="form-control" id="jenis" name="jenis" value="{{ old('jenis') }}" placeholder="Hardware">
-                        @error('jenis')
+                    <div class="mb-3">
+                        <label for="jenis_bahan_baku" class="form-label">Jenis Material</label>
+                        <input type="text" class="form-control" id="jenis_bahan_baku" name="jenis_bahan_baku" value="{{ old('jenis_bahan_baku') }}" placeholder="Hardware">
+                        @error('jenis_bahan_baku')
                             <div class="text-danger mt-2">
                                 {{ $message }}
                             </div>
@@ -42,59 +42,58 @@
 
                     {{-- jumlah material --}}
                     <div class="mb-3">
-                        <label for="jumlah_material" class="form-label">Jumlah Material</label>
-                        <input type="text" class="form-control" id="jumlah_material" name="jumlah_material" value="{{ old('jumlah_material') }}" placeholder="10">
-                        @error('jumlah_material')
+                        <label for="jumlah_bahan_baku" class="form-label">Jumlah Material</label>
+                        <input type="text" class="form-control" id="jumlah_bahan_baku" name="jumlah_bahan_baku" value="{{ old('jumlah_bahan_baku') }}" placeholder="10">
+                        @error('jumlah_bahan_baku')
                             <div class="text-danger mt-2">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
 
-                        {{-- total biaya --}}
-                        <div class="mb-3">
-                            <label for="total_biaya" class="form-label">Total Biaya Material</label>
-                            <input type="text" class="form-control" id="total_biaya" name="total_biaya" value="{{ old('total_biaya') }}" placeholder="1500000">
-                            @error('total_biaya')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-{{-- TANGGAL PEMBELIAN MATERIAL --}}
+                    {{-- total biaya --}}
                     <div class="mb-3">
-                            <label for="tanggal_pembelian" class="form-label">Tanggal Pembelian Material</label>
-                            <input type="date" class="form-control" id="tanggal_pembelian" name="tanggal_pembelian" placeholder="2022-10-02">
-                            @error('tanggal_pembelian')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                        <label for="total_biaya_bahan_baku" class="form-label">Total Biaya Material</label>
+                        <input type="text" class="form-control" id="total_biaya_bahan_baku" name="total_biaya_bahan_baku" value="{{ old('total_biaya_bahan_baku') }}" placeholder="1500000">
+                        @error('total_biaya_bahan_baku')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    {{-- TANGGAL PEMBELIAN MATERIAL --}}
+                    <div class="mb-3">
+                        <label for="tanggal_pembelian" class="form-label">Tanggal Pembelian Material</label>
+                        <input type="date" class="form-control" id="tanggal_pembelian" name="tanggal_pembelian" value="{{ old('tanggal_pembelian') }}" placeholder="2022-10-02">
+                        @error('tanggal_pembelian')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     {{-- STATUS PEMBAYARAN --}}
                     <div class="mb-3">
-                            <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
-                            <input type="text" class="form-control" id="status_pembayaran" name="status_pembayaran" placeholder="Belum Dibayar">
-                            @error('status_pembayaran')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                        <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
+                        <input type="text" class="form-control" id="status_pembayaran" name="status_pembayaran" value="{{ old('status_pembayaran') }}" placeholder="Belum Dibayar">
+                        @error('status_pembayaran')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
                     {{-- STATUS BARANG --}}
                     <div class="mb-3">
-                            <label for="status_material" class="form-label">Status Material</label>
-                            <input type="text" class="form-control" id="status_material" name="status_material" placeholder="Tidak Sesuai Pesanan">
-                            @error('status_material')
-                                <div class="text-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                        <label for="status_bahan_baku" class="form-label">Status Material</label>
+                        <input type="text" class="form-control" id="status_bahan_baku" name="status_bahan_baku" value="{{ old('status_bahan_baku') }}" placeholder="Tidak Sesuai Pesanan">
+                        @error('status_bahan_baku')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </section>
                 <section id="button" class="d-lg-flex d-block">
                     <button type="reset" class="btn btn-secondary me-2">Reset</button>
