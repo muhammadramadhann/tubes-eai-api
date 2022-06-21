@@ -156,12 +156,12 @@ class ResignController extends Controller
         }
 
         try {
-            $resign->update($request->all());
             if ($request->status == 'Disetujui') {
                 $employee->update(['status' => 'Resign']);
             } else {
                 $employee->update(['status' => 'Aktif']);
             }
+            $resign->update($request->all());
 
             return response()->json([
                 'status' => 'success',
