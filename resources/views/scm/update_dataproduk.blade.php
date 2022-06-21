@@ -36,9 +36,9 @@
 
                     {{-- ketersediaan produk --}}
                 <div class="mb-3">
-                        <label for="ketersediaan" class="form-label">Ketersediaan Produk</label>
-                        <input type="text" class="form-control" id="ketersediaan" name="ketersediaan" value="{{$dataproduk->ketersediaan_produk}}" placeholder="Tersedia">
-                        @error('ketersediaan')
+                        <label for="ketersediaan_produk" class="form-label">Ketersediaan Produk</label>
+                        <input type="text" class="form-control" id="ketersediaan_produk" name="ketersediaan_produk" value="{{$dataproduk->ketersediaan_produk}}" placeholder="Tersedia">
+                        @error('ketersediaan_produk')
                             <div class="text-danger mt-2">
                                 {{ $message }}
                             </div>
