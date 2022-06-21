@@ -37,7 +37,7 @@
                         <label for="alasan_resign" class="form-label">Alasan Resign</label>
                         <select class="form-select" id="alasan_resign" name="alasan_resign" aria-label="Default select example">
                             <option selected disabled>-- Pilih alasan resign --</option>
-                            <option @if ($resign->alasan_resign == "Melanjutkan Pendidikan") @selected(true) @endif value="Melanjutkan Pendidikan">Melanjutkan Pendidikan</option>
+                            <option @if ($resign->alasan_resign == "Melanjutkan pendidikan") @selected(true) @endif value="Melanjutkan Pendidikan">Melanjutkan Pendidikan</option>
                             <option @if ($resign->alasan_resign == "Perubahan karir") @selected(true) @endif value="Perubahan karir">Perubahan karir</option>
                             <option @if ($resign->alasan_resign == "Permasalahan gaji") @selected(true) @endif value="Permasalahan gaji">Permasalahan gaji</option>
                             <option @if ($resign->alasan_resign == "Keluarga") @selected(true) @endif value="Keluarga">Keluarga</option>
