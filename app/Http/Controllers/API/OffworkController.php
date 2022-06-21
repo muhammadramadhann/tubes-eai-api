@@ -22,7 +22,7 @@ class OffworkController extends Controller
         $offworks = Offwork::all();
         return response()->json([
             'status' => 'success',
-            'message' => 'List data absensi karyawan',
+            'message' => 'List data pengajuan cuti karyawan',
             'data' => $offworks
         ], Response::HTTP_OK);
     }
