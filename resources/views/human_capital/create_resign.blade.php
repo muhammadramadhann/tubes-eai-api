@@ -36,7 +36,7 @@
                         <label for="alasan_resign" class="form-label">Alasan Resign</label>
                         <select class="form-select" id="alasan_resign" name="alasan_resign" aria-label="Default select example">
                             <option selected disabled>-- Pilih alasan resign --</option>
-                            <option value="Melanjutkan Pendidikan">Melanjutkan Pendidikan</option>
+                            <option value="Melanjutkan pendidikan">Melanjutkan Pendidikan</option>
                             <option value="Perubahan karir">Perubahan karir</option>
                             <option value="Permasalahan gaji">Permasalahan gaji</option>
                             <option value="Keluarga">Keluarga</option>
