@@ -159,7 +159,10 @@ class ResignController extends Controller
             $resign->update($request->all());
             if ($request->status == 'Disetujui') {
                 $employee->update(['status' => 'Resign']);
+            } else {
+                $employee->update(['status' => 'Aktif']);
             }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data permohonan resign berhasil diupdate',
