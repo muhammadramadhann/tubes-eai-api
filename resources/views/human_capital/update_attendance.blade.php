@@ -77,7 +77,7 @@
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select" id="status" name="status" aria-label="Default select example">
                             <option selected disabled>-- Pilih status --</option>
-                            <option @if ($attendance->status == "Dalam Verifikasi") @selected(true) @endif value="Dalam verifikasi">Dalam verifikasi</option>
+                            <option @if ($attendance->status == "Dalam verifikasi") @selected(true) @endif value="Dalam verifikasi">Dalam verifikasi</option>
                             <option @if ($attendance->status == "Sudah diverifikasi") @selected(true) @endif value="Sudah diverifikasi">Sudah diverifikasi</option>
                             <option @if ($attendance->status == "Absensi tidak valid") @selected(true) @endif value="Absensi tidak valid">Absensi tidak valid</option>
                         </select>
