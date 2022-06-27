@@ -56,7 +56,7 @@
                             <td>{{ $peng->nama_pegawai}}</td>
                             <td>{{ $peng->divisi}}</td>
                             <td>{{ Carbon\Carbon::createFromDate($peng->tanggal_mengajukan)->translatedFormat('j F Y') }}</td>
-                            <td><iframe src="/asset/{{$peng->proposal}}" class="card-img-top"  alt="..."></iframe></td>
+                            <td><iframe src="public/asset/{{$peng->proposal}}" class="card-img-top"  alt="..."></iframe></td>
                             <td>{{ $peng->status_pengajuan}}</td>
                             <td>
                                 <a href="{{ Route('pengajuan.edit', $peng->id) }}" class="btn btn-light border btn-sm text-decoration-none mb-lg-0 mb-2">Update</a>
