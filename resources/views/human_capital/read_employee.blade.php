@@ -10,7 +10,10 @@
     <hr class="mb-4">
     <div class="d-md-flex d-block justify-content-between align-items-center mb-3">
         <h4 class="fw-bold mb-md-0 mb-2">Data Karyawan</h4>
-        <a href="{{ Route('karyawan.create') }}" class="btn btn-primary">Tambah Data</a>
+        <div>
+            <a href="{{ Route('karyawan.create') }}" class="btn btn-primary">Tambah Data</a>
+            <a href="https://eai-easygo.herokuapp.com/api/employee" class="btn btn-secondary">API Data</a>
+        </div>
     </div>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -60,7 +60,7 @@
                 <div class="collapse {{ Request::is('productionreport', 'productionreport/*', 'productionrequest', 'productionrequest/*') ? 'show' : '' }}" id="collapseIt" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('productionreport', 'productionreport/*') ? 'active' : '' }}" href="/productionreport">Laporan Produksi</a>
-                        <a class="nav-link {{ Request::is('productionrequest', 'productionrequest/*') ? 'active' : '' }}" href="/productionrequest">Perencanaan Produksi</a>
+                        <a class="nav-link {{ Request::is('productionrequest', 'productionrequest/*') ? 'active' : '' }}" href="/productionrequest">Request Bahan Baku</a>
                     </nav>
                 </div>
                 
