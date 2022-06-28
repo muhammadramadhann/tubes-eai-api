@@ -15,7 +15,7 @@
     <div class="row mb-5">
         <div class="col-lg-7 col-12">
             {{-- route blm buat --}}
-            <form action="{{ Route('dataproduk.update', $applicant->id) }}" method="POST">
+            <form action="{{ Route('dataproduk.update', $dataproduk->id) }}" method="POST">
                 @csrf
                 {{ method_field('PUT') }}
                 <section id="data-material" class="mb-4">
